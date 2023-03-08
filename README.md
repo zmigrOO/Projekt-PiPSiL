@@ -4,4 +4,4 @@
 3. Clone this repository
 4. Open _**Project-PiPO2**_ directory in terminal 
 5. Execute commands ```composer install```, then ```php artisan migrate```
-6. You are good to go... And if something doesn't work - Remember, it's not me, it's _**✨YOU✨**_ 
+6. You are good to go... And if something doesn't work - Remember, it's not me, _**✨it's YOU✨**_ 
