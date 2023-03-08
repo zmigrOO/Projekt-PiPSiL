@@ -5,3 +5,8 @@
 4. Open _**Project-PiPO2**_ directory in terminal 
 5. Execute commands ```composer install```, then ```php artisan migrate```
 6. You are good to go... And if something doesn't work - Remember, it's not me, _**✨it's YOU✨**_ 
+
+## Serving:
+1. Open _**Project-PiPO2**_ directory in terminal
+2. Run command ```php artisan serve```
+3. Open browser and go to [localhost:8000](localhost:8000)
