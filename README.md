@@ -1,6 +1,6 @@
 ## Installation:
-1. Install [Composer](https://getcomposer.org/download/)
-2. Install [XAMPP](https://www.apachefriends.org/download.html)
+1. Install [XAMPP](https://www.apachefriends.org/download.html)
+2. Install [Composer](https://getcomposer.org/download/)
 3. Clone this repository
 4. Open _**Project-PiPO2**_ directory in terminal 
 5. Execute commands ```composer install```, then ```php artisan migrate```
@@ -9,4 +9,4 @@
 ## Serving:
 1. Open _**Project-PiPO2**_ directory in terminal
 2. Run command ```php artisan serve```
-3. Open browser and go to [localhost:8000](localhost:8000)
+3. Open browser and go to [localhost:8000](http://localhost:8000)
