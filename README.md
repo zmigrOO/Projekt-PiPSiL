@@ -10,4 +10,4 @@
 1. Open _**Project-PiPO2**_ directory in terminal
 2. Run command ```php artisan serve```
 3. Run command ```npm run dev```
-4.Open browser and go to [localhost:8000](http://localhost:8000)
+4. Open browser and go to [localhost:8000](http://localhost:8000)
