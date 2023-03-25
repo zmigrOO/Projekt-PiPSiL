@@ -12,17 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('offers', function (Blueprint $table) {
-            $table->id();
-            $table->integer('category_id');
+            $table->id()->primary();
+            $table->integer('category_id')->foreign()->references('id')->on('cathegories');
             $table->string('name');
             $table->integer('quantity');
             $table->string('condition');
             $table->float('price');
             $table->string('description');
-            $table->integer('seller_id');
+            $table->integer('seller_id')->foreign()->references('id')->on('users');
             $table->timestamp('offer_creation_date');
             $table->timestamp('offer_expiration_date')->default(DB::raw('DATE_ADD(offer_creation_date, INTERVAL 30 DAY)'));
-            $table->boolean('is_active')->default(true);
         });
     }
 

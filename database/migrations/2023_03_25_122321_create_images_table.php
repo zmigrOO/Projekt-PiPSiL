@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cathegories', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('parent_cathegory_id')->nullable()->foreign()->references('id')->on('cathegories'); // NULL if no parent
+            $table->integer('offer_id')->foreign()->references('id')->on('offers');
+            $table->integer('order');
+            $table->binary('Image');
+            $table->primary(['offer_id', 'order']);
         });
     }
 
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cathegories');
+        Schema::dropIfExists('images');
     }
 };
