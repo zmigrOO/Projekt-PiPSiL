@@ -22,6 +22,10 @@ Route::get('/my-offers', function () {
     return view('my-offers');
 })->middleware(['auth', 'verified'])->name('my-offers');
 
+Route::get('/watched', function () {
+    return view('watched-offers');
+})->middleware(['auth', 'verified'])->name('watched-offers');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
