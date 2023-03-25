@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->id();
             $table->integer('offer_id')->foreign()->references('id')->on('offers');
             $table->integer('order');
             $table->binary('Image');
