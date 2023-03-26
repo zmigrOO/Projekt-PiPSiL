@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ProfileController;
+use App\Models\offer;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,21 +16,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return ((new OfferController)->showAll());
+// })->name('offers');
 
-Route::get('/my-offers', function () {
-    return view('my-offers');
-})->middleware(['auth', 'verified'])->name('my-offers');
+Route::get('/', [OfferController::class, 'showAll'])->name('offers');
+
+Route::get('/my-offers', [OfferController::class, 'showMine'])->middleware(['auth', 'verified'])->name('my-offers');
+
+Route::get('/new', function(){
+    return view('new-offer');
+})->middleware(['auth', 'verified'])->name('new');
 
 Route::get('/watched', function () {
     return view('watched-offers');
 })->middleware(['auth', 'verified'])->name('watched-offers');
 
-Route::get('/dashboard', function () {
+Route::get('/home', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -36,4 +42,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
