@@ -21,6 +21,7 @@ class OfferController extends Controller
     public function showAll()
     {
         $offers = Offer::get();
+        
         return view('offers', ['offers' => $offers]);
     }
 
