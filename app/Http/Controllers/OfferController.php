@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\offer;
+use App\Models\Offer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,14 +20,13 @@ class OfferController extends Controller
     //show offer
     public function showAll()
     {
-        
-        $offers = offer::get();
+        $offers = Offer::get();
         return view('offers', ['offers' => $offers]);
     }
 
     public function showMine()
     {
-        $offers = offer::where('seller_id', Auth::user()->id)->get();
+        $offers = Offer::where('seller_id', Auth::user()->id)->get();
         return view('my-offers', ['offers' => $offers]);
     }
 
