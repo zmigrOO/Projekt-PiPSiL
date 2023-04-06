@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Offer;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -30,4 +31,10 @@ class OfferController extends Controller
         return view('my-offers', ['offers' => $offers]);
     }
 
+    public function offers(Request $request): RedirectResponse
+    {
+        $offer = new Offer($request->all());
+        $offer->save();
+        return redirect(route("my-offers"));
+    }
 }
