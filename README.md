@@ -8,6 +8,6 @@
 
 ## Serving:
 1. Open _**Project-PiPSIl**_ directory in terminal
-2. Run command ```php artisan serve```
-3. Run command ```npm run dev```
+2. Open XAMPP, start Apache and SQL
+3. In separate tabs run commands ```npm run dev``` ```php artisan serve```
 4. Open browser and go to [localhost:8000](http://localhost:8000)
