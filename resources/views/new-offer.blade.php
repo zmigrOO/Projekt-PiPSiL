@@ -21,6 +21,17 @@
                             <x-input-error :messages="$errors->get('name')" class="mt-2"/>
                         </div>
 
+                        <!-- Category -->
+                        <div class="mt-4">
+                            <x-input-label for="category" :value="__('Category')"/>
+                            <select id="category" name="category" class="block mt-1 w-full" required>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ old('condition') === 'good' ? 'selected' : '' }}>{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            <x-input-error :messages="$errors->get('category')" class="mt-2"/>
+                        </div>
+
                         <!-- Description -->
                         <div class="mt-4">
                             <x-input-label for="description" :value="__('Description')"/>

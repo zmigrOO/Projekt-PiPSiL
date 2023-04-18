@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cathegory;
 use App\Models\Offer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class OfferController extends Controller
     //show offer
     public function showAll()
     {
-        $offers = Offer::get();
+        $offers = Offer::all();
         return view('offers', ['offers' => $offers]);
     }
 
@@ -29,6 +30,11 @@ class OfferController extends Controller
     {
         $offers = Offer::where('seller_id', Auth::user()->id)->get();
         return view('my-offers', ['offers' => $offers]);
+    }
+    public function new()
+    {
+        $categories = Cathegory::all();
+        return view('new-offer', ['categories' => $categories]);
     }
 
     public function offers(Request $request): RedirectResponse
