@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form method="POST" action="{{ route('offers') }}">
+                    <form method="POST" action='/submit-new'>
                         @csrf
 
                         <!-- Name -->
@@ -25,8 +25,9 @@
                         <div class="mt-4">
                             <x-input-label for="category" :value="__('Category')"/>
                             <select id="category" name="category" class="block mt-1 w-full" required>
+                                <option value="" disabled selected> </option>
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" {{ old('condition') === 'good' ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('category')" class="mt-2"/>
@@ -60,10 +61,8 @@
                         <div class="mt-4">
                             <x-input-label for="condition" :value="__('Condition')"/>
                             <select id="condition" name="condition" class="block mt-1 w-full" required>
-                                <option value="" disabled selected>Select a condition</option>
-                                <option value="brand_new" {{ old('condition') === 'brand_new' ? 'selected' : '' }}>Brand
-                                    New
-                                </option>
+                                <option value="" disabled selected> </option>
+                                <option value="brand_new" {{ old('condition') === 'brand_new' ? 'selected' : '' }}>Brand New</option>
                                 <option value="good" {{ old('condition') === 'good' ? 'selected' : '' }}>Good</option>
                                 <option value="used" {{ old('condition') === 'used' ? 'selected' : '' }}>Used</option>
                             </select>

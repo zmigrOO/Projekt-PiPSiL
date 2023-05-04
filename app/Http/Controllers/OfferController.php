@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cathegory;
+use App\Models\Category;
 use App\Models\Offer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -33,11 +33,11 @@ class OfferController extends Controller
     }
     public function new()
     {
-        $categories = Cathegory::all();
+        $categories = Category::all();
         return view('new-offer', ['categories' => $categories]);
     }
 
-    public function offers(Request $request): RedirectResponse
+    public function add(Request $request): RedirectResponse
     {
         $offer = new Offer($request->all());
         $offer->save();
