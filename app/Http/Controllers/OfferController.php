@@ -54,4 +54,15 @@ class OfferController extends Controller
         $offer->save();
         return redirect(route("my-offers"));
     }
+    public function details($id)
+    {
+        echo $id;
+        // //to offer add images and category
+        // $offer = Offer::where('id', $id)->first();
+        // $offer->category = Category::where('id', $offer->category_id)->first();
+        // $offer->images = DB::table('images')->where('offer_id', $offer->id)->get();
+
+
+        // return view('offer-layout', ['offer' => $offer]);
+    }
 }

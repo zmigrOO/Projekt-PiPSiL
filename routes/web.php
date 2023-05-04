@@ -21,6 +21,19 @@ use Illuminate\Support\Facades\Route;
 // })->name('offers');
 
 Route::get('/', [OfferController::class, 'showAll'])->name('offers');
+//route for offer details page - offer-layout.blade.php - offer/{id} - id is offer id in database - offer is offer controller - details is function in offer controller, it takes id as a parameter
+Route::get('/offer?id={id}', 'OfferController@details');
+
+
+
+
+
+// Route::get('/offer/{id}', [OfferController::class, 'details({id})'])->name('offer');
+
+// Route::get('/offer/{id}', function ($id) {
+//     $offer = Offer::find($id);
+//     return view('offer-layout', ['offer' => $offer]);
+// })->name('offer');
 
 Route::get('/my-offers', [OfferController::class, 'showMine'])->middleware(['auth', 'verified'])->name('my-offers');
 
