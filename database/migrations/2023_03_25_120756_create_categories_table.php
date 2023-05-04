@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->integer('parent_category_id')->nullable()->foreign()->references('id')->on('categories'); // NULL if no parent
         });
+        DB::table('categories')->insert(['name' => 'Electronics', 'parent_category_id' => NULL]);
+        DB::table('categories')->insert(['name' => 'Computers', 'parent_category_id' => 1]);
+        DB::table('categories')->insert(['name' => 'Furniture', 'parent_category_id' => NULL]);
+        DB::table('categories')->insert(['name' => 'Clothes', 'parent_category_id' => NULL]);
 
         DB::statement('ALTER TABLE categories AUTO_INCREMENT = 1'); // Set auto increment to 1
     }
