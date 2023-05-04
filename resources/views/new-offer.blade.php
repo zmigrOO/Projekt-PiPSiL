@@ -73,7 +73,7 @@
                         <div class="mt-4">
                             <x-input-label for="quantity" :value="__('Quantity')"/>
                             <x-text-input id="quantity" class="block mt-1 w-full" type="number" min="1" name="quantity"
-                                          :value="old('quantity')" required/>
+                                          :value="1" required/>
                             <x-input-error :messages="$errors->get('quantity')" class="mt-2"/>
                         </div>
 

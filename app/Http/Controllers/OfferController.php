@@ -39,7 +39,18 @@ class OfferController extends Controller
 
     public function add(Request $request): RedirectResponse
     {
-        $offer = new Offer($request->all());
+        //get data from request, but pass category as its id
+        $offer = new Offer();
+        $offer->name = $request->input('name');
+        $offer->description = $request->input('description');
+        $offer->quantity = $request->input('quantity');
+        $offer->price = $request->input('price');
+        $offer->condition = $request->input('condition');
+        $offer->category_id = $request->input('category');
+        $offer->offer_creation_date = now();
+        $offer->seller_id = Auth::user()->id;
+
+
         $offer->save();
         return redirect(route("my-offers"));
     }
