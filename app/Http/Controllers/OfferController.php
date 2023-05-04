@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Offer;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +22,7 @@ class OfferController extends Controller
     //show offer
     public function showAll()
     {
-        $offers = Offer::get();
+        $offers = Offer::all();
         return view('offers', ['offers' => $offers]);
     }
 
@@ -29,5 +31,27 @@ class OfferController extends Controller
         $offers = Offer::where('seller_id', Auth::user()->id)->get();
         return view('my-offers', ['offers' => $offers]);
     }
+    public function new()
+    {
+        $categories = Category::all();
+        return view('new-offer', ['categories' => $categories]);
+    }
 
+    public function add(Request $request): RedirectResponse
+    {
+        //get data from request, but pass category as its id
+        $offer = new Offer();
+        $offer->name = $request->input('name');
+        $offer->description = $request->input('description');
+        $offer->quantity = $request->input('quantity');
+        $offer->price = $request->input('price');
+        $offer->condition = $request->input('condition');
+        $offer->category_id = $request->input('category');
+        $offer->offer_creation_date = now();
+        $offer->seller_id = Auth::user()->id;
+
+
+        $offer->save();
+        return redirect(route("my-offers"));
+    }
 }

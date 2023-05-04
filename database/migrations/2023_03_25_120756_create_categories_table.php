@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cathegories', function (Blueprint $table) {
-            $table->id();
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id('id');
             $table->string('name');
-            $table->integer('parent_cathegory_id')->nullable()->foreign()->references('id')->on('cathegories'); // NULL if no parent
+            $table->integer('parent_category_id')->nullable()->foreign()->references('id')->on('categories'); // NULL if no parent
         });
+
+        DB::statement('ALTER TABLE categories AUTO_INCREMENT = 1'); // Set auto increment to 1
     }
 
     /**

@@ -24,9 +24,8 @@ Route::get('/', [OfferController::class, 'showAll'])->name('offers');
 
 Route::get('/my-offers', [OfferController::class, 'showMine'])->middleware(['auth', 'verified'])->name('my-offers');
 
-Route::get('/new', function(){
-    return view('new-offer');
-})->middleware(['auth', 'verified'])->name('new');
+Route::get('/new', [OfferController::class, 'new'])->middleware(['auth', 'verified'])->name('new');
+Route::post('/submit-new', [OfferController::class, 'add'])->middleware(['auth', 'verified']);
 
 Route::get('/watched', function () {
     return view('watched-offers');

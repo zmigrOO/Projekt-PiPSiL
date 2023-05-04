@@ -49,12 +49,12 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property int|null $parent_cathegory_id
- * @method static \Illuminate\Database\Eloquent\Builder|cathegory newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|cathegory newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|cathegory query()
- * @method static \Illuminate\Database\Eloquent\Builder|cathegory whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|cathegory whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|cathegory whereParentCathegoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereParentCathegoryId($value)
  */
 	class cathegory extends \Eloquent {}
 }
