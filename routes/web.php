@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [OfferController::class, 'showAll'])->name('offers');
 //route for offer details page - offer-layout.blade.php - offer/{id} - id is offer id in database - offer is offer controller - details is function in offer controller, it takes id as a parameter
-Route::get('/offer?id={id}', 'OfferController@details');
+Route::get('/offers/{id}', [OfferController::class, 'details'])->name('offer');
 
 
 

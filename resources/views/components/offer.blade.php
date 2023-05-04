@@ -33,7 +33,7 @@
   <div class="flex-none w-56 relative">
     <img src="/images/samolot.bmp" alt="" class="absolute inset-0 w-full h-full object-cover rounded-lg" loading="lazy" />
   </div>
-    <a href="/offers?id={{ $offer->id }}" class="flex-auto p-6">
+    <a href="/offers/{{ $offer->id }}" class="flex-auto p-6">
   <form class="flex-auto p-6">
     <div class="flex flex-wrap">
       <h1 class="flex-auto font-medium text-4xl p-6 text-gray-900 dark:text-gray-100 ">

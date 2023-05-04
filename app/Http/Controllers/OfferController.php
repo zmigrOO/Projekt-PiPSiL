@@ -56,13 +56,12 @@ class OfferController extends Controller
     }
     public function details($id)
     {
-        echo $id;
-        // //to offer add images and category
-        // $offer = Offer::where('id', $id)->first();
-        // $offer->category = Category::where('id', $offer->category_id)->first();
-        // $offer->images = DB::table('images')->where('offer_id', $offer->id)->get();
+        //to offer add images and category
+        $offer = Offer::where('id', $id)->first();
+        $offer->category = Category::where('id', $offer->category_id)->first();
+        $offer->images = DB::table('images')->where('offer_id', $offer->id)->get();
+        // dd($offer);
 
-
-        // return view('offer-layout', ['offer' => $offer]);
+        return view('offerLayout', ['offer' => $offer]);
     }
 }
