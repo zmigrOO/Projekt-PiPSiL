@@ -51,13 +51,32 @@
       </div>
     </div>
     <div class="float-right flex space-x-4 mb-5 text-sm font-medium">
-      {{-- <button class="float-right flex items-center justify-center w-9 h-9 rounded-full text-violet-600 bg-violet-50" type="button" aria-label="Like"> --}}
-{{-- q: how to make this image a button that is adding offer to wishlist --}}
 
-        <a href="/watch/{{ $offer->id }}"><img class="dark:invert" src="@if($offer->watched==true)fav.svg @else nfav.svg @endif" alt="favourite" class="w-5 h-5"></a>
-      {{-- </button> --}}
+
+        {{-- <a href="/watch/{{ $offer->id }}"><img class="dark:invert" src="@if($offer->watched==true)fav.svg @else nfav.svg @endif" alt="favourite" class="w-5 h-5"></a> --}}
+        <a style="cursor: pointer;" onclick="watchOffer({{ $offer->id }}, document.getElementById('img{{$offer->id}}'))">
+    <img id="img{{ $offer->id }}" class="dark:invert" src="@if($offer->watched==true)fav.svg @else nfav.svg @endif" alt="favourite" class="w-5 h-5">
+        </a>
     </div>
 
   </form>
 </div>
 </div>
+<script>
+function watchOffer(offerId, img) {
+    fetch('/watch/' + offerId)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(response) {
+            // update the image src based on the response
+            if (response.watched == true) {
+                img.src = 'fav.svg';
+                // console.log('fav.svg');
+            } else {
+                img.src = 'nfav.svg';
+                // console.log('nfav.svg');
+            }
+        });
+}
+</script>

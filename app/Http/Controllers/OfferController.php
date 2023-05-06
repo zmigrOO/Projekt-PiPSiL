@@ -103,13 +103,16 @@ class OfferController extends Controller
         //if offer is watched by current user, delete it from watched offers, else add it to watched offers
         if (WatchedOffer::where('offer_id', $id)->where('user_id', Auth::user()->id)->exists()) {
             WatchedOffer::where('offer_id', $id)->where('user_id', Auth::user()->id)->delete();
+            $watched = false;
         } else {
             $watchedOffer = new WatchedOffer();
             $watchedOffer->offer_id = $id;
             $watchedOffer->user_id = Auth::user()->id;
             $watchedOffer->save();
+            $watched = true;
         }
         //redirect to the view user came from
-        return redirect()->back();
+        // return redirect()->back();
+        return response()->json(['watched' => $watched]);
     }
 }
