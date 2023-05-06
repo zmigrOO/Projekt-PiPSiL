@@ -29,7 +29,12 @@ class OfferController extends Controller
         foreach ($offers as $offer) {
             $offer->category = Category::where('id', $offer->category_id)->first();
             $offer->image = image::where('offer_id', $offer->id)->where('order', 0)->first();
-            $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
+            //check if user is logged in
+            if (Auth::check()) {
+                $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
+            } else {
+                $offer->watched = false;
+            }
         }
 
         return view('offers', ['offers' => $offers]);

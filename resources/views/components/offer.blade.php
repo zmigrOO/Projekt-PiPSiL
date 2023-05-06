@@ -54,9 +54,12 @@
 
 
         {{-- <a href="/watch/{{ $offer->id }}"><img class="dark:invert" src="@if($offer->watched==true)fav.svg @else nfav.svg @endif" alt="favourite" class="w-5 h-5"></a> --}}
+        {{-- if user is authenticated --}}
+        @auth
         <a style="cursor: pointer;" onclick="watchOffer({{ $offer->id }}, document.getElementById('img{{$offer->id}}'))">
     <img id="img{{ $offer->id }}" class="dark:invert" src="@if($offer->watched==true)fav.svg @else nfav.svg @endif" alt="favourite" class="w-5 h-5">
         </a>
+        @endauth
     </div>
 
   </form>
