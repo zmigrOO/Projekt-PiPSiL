@@ -16,33 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return ((new OfferController)->showAll());
-// })->name('offers');
-
 Route::get('/', [OfferController::class, 'showAll'])->name('offers');
 //route for offer details page - offer-layout.blade.php - offer/{id} - id is offer id in database - offer is offer controller - details is function in offer controller, it takes id as a parameter
 Route::get('/offers/{id}', [OfferController::class, 'details'])->name('offer');
 
-
-
-
-
-// Route::get('/offer/{id}', [OfferController::class, 'details({id})'])->name('offer');
-
-// Route::get('/offer/{id}', function ($id) {
-//     $offer = Offer::find($id);
-//     return view('offer-layout', ['offer' => $offer]);
-// })->name('offer');
-
 Route::get('/my-offers', [OfferController::class, 'showMine'])->middleware(['auth', 'verified'])->name('my-offers');
 
 Route::get('/new', [OfferController::class, 'new'])->middleware(['auth', 'verified'])->name('new');
+
 Route::post('/submit-new', [OfferController::class, 'add'])->middleware(['auth', 'verified']);
 
-Route::get('/watched', function () {
-    return view('watched-offers');
-})->middleware(['auth', 'verified'])->name('watched-offers');
+Route::get('/watched', [OfferController::class, 'wishlist'])->middleware(['auth', 'verified'])->name('watched-offers');
+
+Route::get('/watch/{id}', [OfferController::class, 'wishChange'])->middleware(['auth', 'verified']);
 
 Route::get('/home', function () {
     return view('dashboard');

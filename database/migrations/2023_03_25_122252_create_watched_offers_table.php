@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('watched_offers', function (Blueprint $table) {
             $table->integer('offer_id')->foreign()->references('id')->on('offers');
             $table->integer('user_id')->foreign()->references('id')->on('users');
+            //add updated_at and created_at columns
+            $table->timestamps();
             $table->primary(['offer_id', 'user_id']);
         });
     }

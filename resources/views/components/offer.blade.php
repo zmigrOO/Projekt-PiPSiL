@@ -29,29 +29,35 @@
 
 
 
-<div class="flex font-sans py-2">
-  <div class="flex-none w-56 relative">
-    <img src="/images/samolot.bmp" alt="" class="absolute inset-0 w-full h-full object-cover rounded-lg" loading="lazy" />
-  </div>
-    <a href="/offers/{{ $offer->id }}" class="flex-auto p-6">
+    <div class="flex font-sans py-2">
+        <div class="flex-none w-56 relative">
+            <a href="/offers/{{ $offer->id }}">
+            <img src="/images/samolot.bmp" alt="" class="absolute inset-0 w-full h-full object-cover rounded-lg" loading="lazy" />
+        </a>
+        </div>
   <form class="flex-auto p-6">
     <div class="flex flex-wrap">
       <h1 class="flex-auto font-medium text-4xl p-6 text-gray-900 dark:text-gray-100 ">
+            <a href="/offers/{{ $offer->id }}">
+
         {{ $offer->name }}
+    </a>
       </h1>
       <div class="w-full flex-none mt-2 order-1 text-3xl font-bold text-violet-600">
         ${{ $offer->price }}
       </div>
       <div class="text-sm font-medium text-slate-400">
-        In stock: {{ $offer->quantity }} items
+        Available: {{ $offer->quantity }} items
       </div>
     </div>
     <div class="float-right flex space-x-4 mb-5 text-sm font-medium">
       {{-- <button class="float-right flex items-center justify-center w-9 h-9 rounded-full text-violet-600 bg-violet-50" type="button" aria-label="Like"> --}}
-        <img class="dark:invert" src="nfav.svg" alt="nfav" class="w-5 h-5">
+{{-- q: how to make this image a button that is adding offer to wishlist --}}
+
+        <a href="/watch/{{ $offer->id }}"><img class="dark:invert" src="@if($offer->watched==true)fav.svg @else nfav.svg @endif" alt="favourite" class="w-5 h-5"></a>
       {{-- </button> --}}
     </div>
 
-  </form></a>
+  </form>
 </div>
 </div>
