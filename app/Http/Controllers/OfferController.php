@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\image;
 use App\Models\Offer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -59,9 +60,12 @@ class OfferController extends Controller
         //to offer add images and category
         $offer = Offer::where('id', $id)->first();
         $offer->category = Category::where('id', $offer->category_id)->first();
-        $offer->images = DB::table('images')->where('offer_id', $offer->id)->get();
-        // dd($offer);
+        // q: can i attach more than one image to offer?
 
-        return view('offerLayout', ['offer' => $offer]);
+        $offer->images = image::where('offer_id', $offer->id)->get();
+        // $offer->images = DB::table('images')->where('offer_id', $offer->id)->get();
+        dd($offer);
+
+        // return view('offer-layout', ['offer' => $offer]);
     }
 }
