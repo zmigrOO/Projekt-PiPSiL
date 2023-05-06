@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class WatchedOffer extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'offer_id',
+    ];
+
 }
