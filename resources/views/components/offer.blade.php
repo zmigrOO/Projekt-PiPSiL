@@ -29,18 +29,17 @@
 
 
 
-    <div class="flex font-sans py-2 sm:max-h-fit" style="">
-        <div class="flex-none w-56 relative" style="max-width: 30vw">
+    <div class="flex font-sans py-2 h-40 sm:h-fit">
+        <div class="flex-none w-56 relative " style="max-width: 30vw">
             <a href="/offers/{{ $offer->id }}">
                 <img src="/images/samolot.bmp" alt=""
                     class="absolute inset-0 w-full h-full object-cover rounded-lg" loading="lazy" />
             </a>
         </div>
         <form class="flex-auto p-6">
-            <div class="flex flex-wrap">
-                <h1 class="flex-auto font-medium text-4xl p-6 text-gray-900 dark:text-gray-100 ">
+            <div class="flex flex-wrap relative">
+                <h1 class="flex-auto font-medium text-4xl pb-6 text-gray-900 dark:text-gray-100 ">
                     <a href="/offers/{{ $offer->id }}">
-
                         {{ $offer->name }}
                     </a>
                 </h1>
@@ -48,24 +47,19 @@
                     ${{ $offer->price }}
                 </div>
                 <div class="text-sm font-medium text-slate-400">
-                    Available: {{ $offer->quantity }} items
+                    Available: {{ $offer->quantity }}
                 </div>
+                {{-- @if(Auth::user()->id == $offer->user_id) @auth --}}
+                <div class="absolute right-0 bottom-0">
+                        <a style="cursor: pointer;"
+                            onclick="watchOffer({{ $offer->id }}, document.getElementById('img{{ $offer->id }}'))">
+                            <img id="img{{ $offer->id }}" class="dark:invert"
+                                src="@if ($offer->watched == true) fav.svg @else nfav.svg @endif" alt="favourite"
+                                class="w-5 h-5">
+                        </a>
+                    </div>
+                 {{-- @endauth @endif --}}
             </div>
-            <div class="float-right flex space-x-4 mb-5 text-sm font-medium">
-
-
-                {{-- <a href="/watch/{{ $offer->id }}"><img class="dark:invert" src="@if ($offer->watched == true)fav.svg @else nfav.svg @endif" alt="favourite" class="w-5 h-5"></a> --}}
-                {{-- if user is authenticated --}}
-                @auth @if(Auth::user()->id == $offer->user_id)
-                    <a style="cursor: pointer;"
-                        onclick="watchOffer({{ $offer->id }}, document.getElementById('img{{ $offer->id }}'))">
-                        <img id="img{{ $offer->id }}" class="dark:invert"
-                            src="@if ($offer->watched == true) fav.svg @else nfav.svg @endif" alt="favourite"
-                            class="w-5 h-5">
-                    </a>
-                @endauth @endif
-            </div>
-
         </form>
     </div>
 </div>

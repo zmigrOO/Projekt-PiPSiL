@@ -83,9 +83,24 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
+        <div class="pt-2 pb-0 space-y-1">
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Home') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-0 space-y-1">
+            <x-responsive-nav-link :href="route('my-offers')" :active="request()->routeIs('my-offers')">
+                {{ __('My Offers') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-0 space-y-1">
+            <x-responsive-nav-link :href="route('watched-offers')" :active="request()->routeIs('watched-offers')">
+                {{ __('Watched Offers') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('new')" :active="request()->routeIs('new')">
+                {{ __('New Offer') }}
             </x-responsive-nav-link>
         </div>
 

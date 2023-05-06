@@ -12,5 +12,5 @@ class WatchedOffer extends Model
         'user_id',
         'offer_id',
     ];
-
+    public $timestamps = false;
 }

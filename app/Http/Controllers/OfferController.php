@@ -42,9 +42,11 @@ class OfferController extends Controller
 
     public function showMine()
     {
-        $offers = Offer::where('seller_id', Auth::user()->id)->get();
+        $offerIDs = Offer::where('seller_id', Auth::user()->id)->get('id');
+        $offers = Offer::whereIn('seller_id', $offerIDs)->get();
         foreach ($offers as $offer) {
-            $offer->category = Category::where('id', $offer->category_id)->first();
+            //how to fix errors
+            $offer->category = Category::where('id', $offer->category_id)->get()->first();
             $offer->image = image::where('offer_id', $offer->id)->where('order', 0)->first();
             $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
         }
