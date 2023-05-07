@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\image;
 use App\Models\Offer;
+use App\Models\Opinion;
+use App\Models\User;
 use App\Models\WatchedOffer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -81,11 +83,15 @@ class OfferController extends Controller
         //to offer add images and category
         $offer = Offer::where('id', $id)->first();
         $offer->category = Category::where('id', $offer->category_id)->first();
-        $offer->images = image::where('offer_id', $offer->id)->get();
-        // $offer->images = DB::table('images')->where('offer_id', $offer->id)->get();
-        dd($offer);
-
-        // return view('offer-layout', ['offer' => $offer]);
+        $offer->images = image::where('offer_id', $offer->id)->orderBy('order', 'asc')->get();
+        $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
+        $offer->seller = User::where('id', $offer->seller_id)->first();
+        $offer->opinions = Opinion::where('offer_id', $offer->id)->get();
+        foreach ($offer->opinions as $opinion) {
+            $opinion->user = User::where('id', $opinion->user_id)->first();
+        }
+        // dd($offer);
+        return view('components.offer-layout', ['offer' => $offer]);
     }
     public function wishlist()
     {

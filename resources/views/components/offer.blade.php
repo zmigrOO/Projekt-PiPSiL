@@ -36,7 +36,7 @@
                     class="absolute inset-0 w-full h-full object-cover rounded-lg" loading="lazy" />
             </a>
         </div>
-        <form class="flex-auto p-6">
+        <form class="flex-auto px-6">
             <div class="flex flex-wrap relative">
                 <h1 class="flex-auto font-medium text-4xl pb-6 text-gray-900 dark:text-gray-100 ">
                     <a href="/offers/{{ $offer->id }}">
@@ -48,8 +48,8 @@
                 </div>
                 <div class="text-sm font-medium text-slate-400">
                     Available: {{ $offer->quantity }}
-                </div>
-                {{-- @if(Auth::user()->id == $offer->user_id) @auth --}}
+                </div>@auth
+                @if(Auth::user()->id == $offer->user_id)
                 <div class="absolute right-0 bottom-0">
                         <a style="cursor: pointer;"
                             onclick="watchOffer({{ $offer->id }}, document.getElementById('img{{ $offer->id }}'))">
@@ -58,7 +58,7 @@
                                 class="w-5 h-5">
                         </a>
                     </div>
-                 {{-- @endauth @endif --}}
+                  @endif @endauth
             </div>
         </form>
     </div>

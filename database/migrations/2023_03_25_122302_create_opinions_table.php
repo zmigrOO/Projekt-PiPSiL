@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('user_id')->foreign()->references('id')->on('users');
             $table->string('content');
             $table->integer('rating');
-            $table->timestamp('opinion_creation_date');
+            $table->timestamps();
             $table->primary(['offer_id', 'user_id']);
         });
     }
