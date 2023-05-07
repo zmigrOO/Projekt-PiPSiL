@@ -24,7 +24,7 @@
                         <!-- Category -->
                         <div class="mt-4">
                             <x-input-label for="category" :value="__('Category')"/>
-                            <select id="category" name="category" class="block mt-1 w-full" required>
+                            <select id="category" name="category" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-full" required>
                                 <option value="" disabled selected> </option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -60,7 +60,7 @@
                         <!-- Condition -->
                         <div class="mt-4">
                             <x-input-label for="condition" :value="__('Condition')"/>
-                            <select id="condition" name="condition" class="block mt-1 w-full" required>
+                            <select id="condition" name="condition" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-full" required>
                                 <option value="" disabled selected> </option>
                                 <option value="brand_new" {{ old('condition') === 'brand_new' ? 'selected' : '' }}>Brand New</option>
                                 <option value="good" {{ old('condition') === 'good' ? 'selected' : '' }}>Good</option>
@@ -94,4 +94,8 @@
             </div>
         </div>
     </div>
+    <script>
+        import { Select, initTE } from "tw-elements";
+initTE({ Select });
+    </script>
 </x-app-layout>
