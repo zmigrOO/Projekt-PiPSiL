@@ -25,7 +25,7 @@
                     Available: {{ $offer->quantity }}
                 </div>
                 @if ($offer->auth != null)
-                    @if ($offer->auth == $offer->seller_id)
+                    @if ($offer->auth != $offer->seller_id)
                         <div class="absolute right-0 bottom-0">
                             <a style="cursor: pointer;"
                                 onclick="watchOffer({{ $offer->id }}, document.getElementById('img{{ $offer->id }}'))">
