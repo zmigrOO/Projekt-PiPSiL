@@ -54,7 +54,7 @@ class OfferController extends Controller
             $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
             $offer->auth = Auth::check() ? Auth::user()->id : null;
         }
-        dd($offers);
+        // dd($offers);
         return view('my-offers', ['offers' => $offers]);
     }
     public function new()
