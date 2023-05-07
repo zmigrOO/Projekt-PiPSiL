@@ -1,0 +1,33 @@
+<?php
+
+return [
+    'welcome' => 'Witaj na mojej stronie!',
+    'login' => 'Zaloguj się',
+    'register' => 'Zarejestruj się',
+    'home' => 'Strona Główna',
+    'condition' => 'Stan',
+    'seller' => 'Sprzedający',
+    'description' => 'Opis',
+    'product_reviews' => 'Opinie o produkcie',
+    'price' => 'Cena',
+    'logged_in' => 'Jesteś zalogowany!',
+    'my_offers' => 'Moje Oferty',
+    'watched_offers' => 'Obserwowane Oferty',
+    'create' => 'Utwórz Nową Ofertę',
+    'new_offer' => 'Dodaj Nową Ofertę',
+    'available' => 'Dostępne',
+    'name' => 'Nazwa',
+    'category' => 'Kategoria',
+    'quantity' => 'Ilość',
+    'save' => 'Zapisz',
+    'profile' => 'Profil',
+    'logout' => 'Wyloguj',
+    'profile_information' => 'Informacje',
+    'current_password' => 'Obecne Hasło',
+    'new_password' => 'Nowe Hasło',
+    'confirm_password' => 'Potwierdź Hasło',
+    'update_password' => 'Uaktualnij Hasło',
+    'dont_wait_add_first_offer' => "Nie czekaj i dodaj swoją pierwszą ofertę!",
+    'email'=> 'Email',
+    'characters_entered'=>'znaków'
+];

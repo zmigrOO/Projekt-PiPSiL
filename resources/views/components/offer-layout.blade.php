@@ -8,11 +8,11 @@
                 <x-img-carousel :images="$offer->images" />
                 <div class="relative top-5">
                     <h1 class="text-2xl font-bold mb-2 dark:text-slate-50">{{ $offer->name }}</h1>
-                    <p class="text-gray-600 mb-4 dark:text-gray-400">Condition: {{ $offer->condition }}</p>
-                    <p class="text-gray-600 mb-4 dark:text-gray-400">Seller: {{ $offer->seller->name }}</p>
+                    <p class="text-gray-600 mb-4 dark:text-gray-400">{{ __('condition') }}: {{ $offer->condition }}</p>
+                    <p class="text-gray-600 mb-4 dark:text-gray-400">{{ __('seller') }} {{ $offer->seller->name }}</p>
 
                     <div class="flex items-center mb-4">
-                        <span class="text-lg font-bold mr-2 dark:text-slate-50">Price: ${{ $offer->price }}</span>
+                        <span class="text-lg font-bold mr-2 dark:text-slate-50">{{ __('price') }}: ${{ $offer->price }}</span>
                     </div>
                     @if ($offer->auth != null)
                         @if ($offer->auth == $offer->seller_id)
@@ -30,7 +30,7 @@
             </div>
 
             <div>
-                <p class="text-gray-600 mb-4 dark:text-slate-50">Description:</p>
+                <p class="text-gray-600 mb-4 dark:text-slate-50"> {{ __('description') }}:</p>
                 <p class="text-gray-600 mb-4 dark:text-slate-50">{{ $offer->description }}</p>
                 <ul class="list-disc list-inside dark:text-gray-300">
                     <li>A place</li>
@@ -39,7 +39,7 @@
                     <li>to certain categories</li>
                 </ul>
 
-                <h2 class="text-lg font-bold mt-8 mb-2 dark:text-gray-300">Product Reviews</h2>
+                <h2 class="text-lg font-bold mt-8 mb-2 dark:text-gray-300">{{ __('product_reviews') }}:</h2>
                 {{-- TODO: place the reviews in the foreach loop --}}
                 @if ($offer->opinions != null)
                     @foreach ($offer->opinions as $opinion)

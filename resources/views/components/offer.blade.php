@@ -22,7 +22,7 @@
                     ${{ $offer->price }}
                 </div>
                 <div class="text-sm font-medium text-slate-400">
-                    Available: {{ $offer->quantity }}
+                    {{ __('available:') }} {{ $offer->quantity }}
                 </div>
                 @if ($offer->auth != null)
                     @if ($offer->auth != $offer->seller_id)

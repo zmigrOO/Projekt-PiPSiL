@@ -13,16 +13,16 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                        {{ __('Home') }}
+                        {{ __('home') }}
                     </x-nav-link>
                     <x-nav-link :href="route('my-offers')" :active="request()->routeIs('my-offers')">
-                        {{ __('My Offers') }}
+                        {{ __('my_offers') }}
                     </x-nav-link>
                     <x-nav-link :href="route('watched-offers')" :active="request()->routeIs('watched-offers')">
-                        {{ __('Watched Offers') }}
+                        {{ __('watched_offers') }}
                     </x-nav-link>
                     <x-nav-link :href="route('new')" :active="request()->routeIs('new')">
-                        {{ __('New Offer') }}
+                        {{ __('new_offer') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -48,7 +48,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('profile') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -58,7 +58,7 @@
                             <x-dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('logout') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -113,7 +113,7 @@
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ __('profile') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -123,7 +123,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                         onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('logout') }}
                     </x-responsive-nav-link>
                 </form>
             </div>

@@ -1,0 +1,33 @@
+<?php
+
+return [
+    'welcome' => 'Welcome on our website!',
+    'login' => 'Login',
+    'register' => 'Register',
+    'home' => 'Home',
+    'condition' => 'Condition',
+    'seller' => 'Seller',
+    'description' => 'Description',
+    'product_reviews' => 'Product Reviews',
+    'price' => 'Price',
+    'logged_in' => 'You are logged in!',
+    'my_offers' => 'My Offers',
+    'watched_offers' => 'Watched Offers',
+    'create'=>'Create New Offer',
+    'new_offer' => 'New Offer' ,
+    'available' => 'Available',
+    'name' => 'Name',
+    'category' => 'Category',
+    'quantity' => 'Quantity',
+    'save' => 'Save',
+    'profile' => 'Profile',
+    'logout' => 'Log Out',
+    'profile_information' => 'Profile Information',
+    'current_password' => 'Current Password',
+    'new_password' => 'New Password' ,
+    'confirm_password' =>'Confirm Password',
+    'update_password' => 'Update Password',
+    'dont_wait_add_first_offer' =>'Do not wait and add your first offer!',
+    'email'=> 'Email',
+    'characters_entered'=>'characters entered'
+];

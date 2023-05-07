@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Create new offer') }}
+            {{ __('create') }}
         </h2>
     </x-slot>
 
@@ -14,7 +14,7 @@
 
                         <!-- Name -->
                         <div>
-                            <x-input-label for="name" :value="__('Name')" />
+                            <x-input-label for="name" :value="__('name')" />
                             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name"
                                 :value="old('name')" required autofocus autocomplete="name" />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
@@ -22,18 +22,18 @@
 
                         <!-- Category -->
                         <div class="mt-4">
-                            <x-input-label for="category" :value="__('Category')" />
+                            <x-input-label for="category" :value="__('category')" />
                             <x-select-option :options="$attributes['categories']" :name="'category'" required />
                             <x-input-error :messages="$errors->get('category')" class="mt-2" />
                         </div>
 
                         <!-- Description -->
                         <div class="mt-4">
-                            <x-input-label for="description" :value="__('Description')" />
+                            <x-input-label for="description" :value="__('description')" />
                             <x-text-input onsubmit="descTrim()" id="description" class="block mt-1 w-full" type="text" name="description"
                                 :value="old('description')" required />
                             <div class="mt-2 text-sm text-gray-500">
-                                <span id="description-counter">0</span> / 50 characters entered
+                                <span id="description-counter">0</span> / 50 {{__('characters_entered')}}
                             </div>
                             <x-input-error :messages="$errors->get('description')" class="mt-2" />
                         </div>
@@ -57,14 +57,14 @@
 
                         <!-- Condition -->
                         <div class="mt-4">
-                            <x-input-label for="condition" :value="__('Condition')" />
+                            <x-input-label for="condition" :value="__('condition')" />
                             <x-select-option :options="$attributes['conditions']" :name="'condition'" required />
                             <x-input-error :messages="$errors->get('condition')" class="mt-2" />
                         </div>
 
                         <!-- Quantity -->
                         <div class="mt-4">
-                            <x-input-label for="quantity" :value="__('Quantity')" />
+                            <x-input-label for="quantity" :value="__('quantity')" />
                             <x-text-input id="quantity" class="block mt-1 w-full" type="number" min="1"
                                 name="quantity" :value="1" required />
                             <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
@@ -72,14 +72,14 @@
 
                         <!-- Price -->
                         <div class="mt-4">
-                            <x-input-label for="price" :value="__('Price')" />
+                            <x-input-label for="price" :value="__('price')" />
                             <x-text-input id="price" class="block mt-1 w-full" type="number" step="0.01"
                                 min="1" name="price" :value="old('price')" required />
                             <x-input-error :messages="$errors->get('price')" class="mt-2" />
                         </div>
                         <div class="flex items-center justify-end mt-4">
                             <x-primary-button class="ml-4">
-                                {{ __('Save') }}
+                                {{ __('save') }}
                             </x-primary-button>
                         </div>
                     </form>
