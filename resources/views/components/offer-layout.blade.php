@@ -15,7 +15,7 @@
                         <span class="text-lg font-bold mr-2 dark:text-slate-50">Price: ${{ $offer->price }}</span>
                     </div>
                     @if ($offer->auth != null)
-                        @if ($offer->auth == $offer->seller_id)
+                        @if ($offer->auth != $offer->seller_id)
                             <div class="absolute right-5 top-1">
                                 <a style="cursor: pointer;"
                                     onclick="watchOffer({{ $offer->id }}, document.getElementById('img{{ $offer->id }}'))">
