@@ -5,10 +5,10 @@
 
 
     <div class="flex font-sans py-2" style="height: 25vh">
-        <div class="flex-none w-56 relative " style="max-width: 30vw">
+        <div class="flex-none w-56 relative rounded-lg overflow-hidden" style="max-width: 30vw">
             <a href="/offers/{{ $offer->id }}">
                 <img src="/images/samolot.bmp" alt=""
-                    class="absolute inset-0 w-full h-full object-cover rounded-lg" loading="lazy" />
+                    class=".hover:scale-110 absolute inset-0 w-full h-full object-cover" loading="lazy" />
             </a>
         </div>
         <form class="flex-auto px-6">
@@ -32,6 +32,7 @@
                                 <img id="img{{ $offer->id }}" class="dark:invert"
                                     src="@if ($offer->watched == true) fav.svg @else nfav.svg @endif"
                                     alt="favourite" class="w-5 h-5">
+
                             </a>
                         </div>
                     @endif
@@ -60,3 +61,11 @@
             });
     }
 </script>
+<style>
+    a img:hover {
+        transform: scale(1.1);
+    }
+    a img{
+        transition: .5s;
+    }
+</style>
