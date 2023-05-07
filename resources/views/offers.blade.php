@@ -14,5 +14,5 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 </x-no-auth>

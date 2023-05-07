@@ -1,21 +1,21 @@
 @props(['images'])
 <div>
     <!-- Because you are alive, everything is possible. - Thich Nhat Hanh -->
-<div class="carousel overflow-hidden rounded-xl bg-gray-200 scroll">
-    <div class="carousel-inner flex overflow-hidden">
-        @foreach ($images as $key => $image)
-        <div class="carousel-item">
-            <img class="w-full h-auto" src="{{ $image->path }}" alt="Carousel Image">
+    <div class="carousel overflow-hidden rounded-xl bg-gray-200 scroll">
+        <div class="carousel-inner flex overflow-hidden">
+            @foreach ($images as $key => $image)
+                <div class="carousel-item">
+                    <img class="w-full h-auto" src="{{ $image->path }}" alt="Carousel Image">
+                </div>
+            @endforeach
         </div>
-        @endforeach
-    </div>
 
-    <div class="carousel-pagination mt-2 mb-2 flex justify-center">
-        @foreach ($images as $key => $image)
-        <button class="pagination-dot @if ($key === 0) active @endif"></button>
-        @endforeach
+        <div class="carousel-pagination mt-2 mb-2 flex justify-center">
+            @foreach ($images as $key => $image)
+                <button class="pagination-dot @if ($key === 0) active @endif"></button>
+            @endforeach
+        </div>
     </div>
-</div>
 
 </div>
 <script>
@@ -27,7 +27,8 @@
         items.forEach((item, index) => {
             item.addEventListener('click', () => {
                 carousel.scrollTo({
-                    left: item.offsetLeft - carousel.offsetWidth / 2 + item.offsetWidth / 2,
+                    left: item.offsetLeft - carousel.offsetWidth / 2 + item
+                        .offsetWidth / 2,
                     behavior: 'smooth'
                 });
 
@@ -38,7 +39,8 @@
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
                 carousel.scrollTo({
-                    left: items[index].offsetLeft - carousel.offsetWidth / 2 + items[index].offsetWidth / 2,
+                    left: items[index].offsetLeft - carousel.offsetWidth / 2 + items[
+                        index].offsetWidth / 2,
                     behavior: 'smooth'
                 });
 
@@ -54,7 +56,7 @@
 </script>
 <style>
     .carousel-inner {
-        scroll-snap-type:x mandatory;
+        scroll-snap-type: x mandatory;
         overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
         scroll-behavior: smooth;

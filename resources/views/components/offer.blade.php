@@ -2,34 +2,9 @@
 <div>
     <!-- Always remember that you are absolutely unique. Just like everyone else. - Margaret Mead -->
 
-    {{-- <div>
-        <div class="mt-4">
-            {{ $offer->name }}
-        </div>
-    </div> --}}
-    {{-- <div class="py-2">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-500 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="float-left">
-                    <img src="images\samolot.bmp" alt="offer image" class="w-48 h-36">
-                </div>
-                <div class="p-6 text-gray-900 dark:text-gray-100 ">
-                    {{ $offer->name }}
-                </div>
-                <div class="p-6 text-gray-900 dark:text-gray-100 float-left">
-                    Price: {{ $offer->price }}
-                </div>
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    Quantity: {{ $offer->quantity }}
-                </div>
-            </div>
-        </div>
-    </div> --}}
 
 
-
-
-    <div class="flex font-sans py-2 h-40 sm:h-fit">
+    <div class="flex font-sans py-2" style="height: 25vh">
         <div class="flex-none w-56 relative " style="max-width: 30vw">
             <a href="/offers/{{ $offer->id }}">
                 <img src="/images/samolot.bmp" alt=""
@@ -48,22 +23,26 @@
                 </div>
                 <div class="text-sm font-medium text-slate-400">
                     Available: {{ $offer->quantity }}
-                </div>@auth
-                @if(Auth::user()->id == $offer->user_id)
-                <div class="absolute right-0 bottom-0">
-                        <a style="cursor: pointer;"
-                            onclick="watchOffer({{ $offer->id }}, document.getElementById('img{{ $offer->id }}'))">
-                            <img id="img{{ $offer->id }}" class="dark:invert"
-                                src="@if ($offer->watched == true) fav.svg @else nfav.svg @endif" alt="favourite"
-                                class="w-5 h-5">
-                        </a>
-                    </div>
-                  @endif @endauth
+                </div>
+                @if ($offer->auth != null)
+                    @if ($offer->auth == $offer->seller_id)
+                        <div class="absolute right-0 bottom-0">
+                            <a style="cursor: pointer;"
+                                onclick="watchOffer({{ $offer->id }}, document.getElementById('img{{ $offer->id }}'))">
+                                <img id="img{{ $offer->id }}" class="dark:invert"
+                                    src="@if ($offer->watched == true) fav.svg @else nfav.svg @endif"
+                                    alt="favourite" class="w-5 h-5">
+                            </a>
+                        </div>
+                    @endif
+                @endif
             </div>
         </form>
     </div>
 </div>
 <script>
+    console.log({{ $offer->auth }} + ' ' + {{ $offer->seller_id }});
+
     function watchOffer(offerId, img) {
         fetch('/watch/' + offerId)
             .then(function(response) {

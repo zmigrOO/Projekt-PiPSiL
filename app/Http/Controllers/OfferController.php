@@ -34,12 +34,15 @@ class OfferController extends Controller
             //check if user is logged in
             if (Auth::check()) {
                 $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
+
             } else {
                 $offer->watched = false;
             }
+            $offer->auth = Auth::check() ? Auth::user()->id : null;
         }
-
+        //  dd($offers);
         return view('offers', ['offers' => $offers]);
+        // return view('offers')->with('offers', $offers)->with('authenticated', $authenticated);
     }
 
     public function showMine()
@@ -47,12 +50,11 @@ class OfferController extends Controller
         $offerIDs = Offer::where('seller_id', Auth::user()->id)->get('id');
         $offers = Offer::whereIn('seller_id', $offerIDs)->get();
         foreach ($offers as $offer) {
-            //how to fix errors
             $offer->category = Category::where('id', $offer->category_id)->get()->first();
             $offer->image = image::where('offer_id', $offer->id)->where('order', 0)->first();
             $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
+            $offer->auth = Auth::check() ? Auth::user()->id : null;
         }
-
         return view('my-offers', ['offers' => $offers]);
     }
     public function new()
@@ -84,12 +86,17 @@ class OfferController extends Controller
         $offer = Offer::where('id', $id)->first();
         $offer->category = Category::where('id', $offer->category_id)->first();
         $offer->images = image::where('offer_id', $offer->id)->orderBy('order', 'asc')->get();
-        $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
+        if (Auth::check()) {
+            $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
+        }else{
+            $offer->watched = false;
+        }
         $offer->seller = User::where('id', $offer->seller_id)->first();
         $offer->opinions = Opinion::where('offer_id', $offer->id)->get();
         foreach ($offer->opinions as $opinion) {
             $opinion->user = User::where('id', $opinion->user_id)->first();
         }
+        $offer->auth = Auth::check() ? Auth::user()->id : null;
         // dd($offer);
         return view('components.offer-layout', ['offer' => $offer]);
     }
@@ -103,6 +110,7 @@ class OfferController extends Controller
             $offer->category = Category::where('id', $offer->category_id)->first();
             $offer->image = image::where('offer_id', $offer->id)->where('order', 0)->first();
             $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
+            $offer->auth = Auth::check() ? Auth::user()->id : null;
         }
 
 
