@@ -59,8 +59,22 @@ class OfferController extends Controller
     }
     public function new()
     {
+        $conditions = [
+            'Brand new',
+            'Like new',
+            'Very good',
+            'Good',
+            'Acceptable',
+            'Used',
+            'For parts or not working'
+        ];
         $categories = Category::all();
-        return view('new-offer', ['categories' => $categories]);
+        // attributes are composed of $conditions and $categories
+        $attributes = [
+            'conditions' => $conditions,
+            'categories' => $categories
+        ];
+        return view('new-offer', ['attributes' => $attributes]);
     }
 
     public function add(Request $request): RedirectResponse

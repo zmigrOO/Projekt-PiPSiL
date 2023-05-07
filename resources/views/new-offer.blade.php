@@ -24,12 +24,7 @@
                         <!-- Category -->
                         <div class="mt-4">
                             <x-input-label for="category" :value="__('Category')"/>
-                            <select id="category" name="category" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-full" required>
-                                <option value="" disabled selected> </option>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
+                            <x-select-option :options="$attributes['categories']" :name="'category'" required/>
                             <x-input-error :messages="$errors->get('category')" class="mt-2"/>
                         </div>
 
@@ -52,20 +47,15 @@
                                 const descriptionLength = descriptionInput.value.length;
                                 const remainingChars = 50 - descriptionLength;
                                 descriptionCounter.textContent = descriptionLength;
-                                descriptionCounter.style.color = remainingChars >= 0 ? '' : '#009917';
-                                descriptionInput.setCustomValidity(remainingChars < 0 ? '' : `Please enter at least ${remainingChars} more characters`);
+                                descriptionCounter.style.color = remainingChars > 0 ? '' : '#009917';
+                                descriptionInput.setCustomValidity(remainingChars <= 0 ? '' : `Please enter at least ${remainingChars} more characters`);
                             });
                         </script>
 
                         <!-- Condition -->
                         <div class="mt-4">
                             <x-input-label for="condition" :value="__('Condition')"/>
-                            <select id="condition" name="condition" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-full" required>
-                                <option value="" disabled selected> </option>
-                                <option value="brand_new" {{ old('condition') === 'brand_new' ? 'selected' : '' }}>Brand New</option>
-                                <option value="good" {{ old('condition') === 'good' ? 'selected' : '' }}>Good</option>
-                                <option value="used" {{ old('condition') === 'used' ? 'selected' : '' }}>Used</option>
-                            </select>
+                            <x-select-option :options="$attributes['conditions']" :name="'condition'" required/>
                             <x-input-error :messages="$errors->get('condition')" class="mt-2"/>
                         </div>
 
