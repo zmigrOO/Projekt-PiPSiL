@@ -51,7 +51,7 @@
                         </a>
                     </div>
                     <div class="h-1/3 w-fit float-left">
-                        <a onclick="deleteOffer({{$offer->id}})" style="cursor: pointer;">
+                        <a onclick="deleteOffer({{$offer->id}}, {{ __('You cannot delete an active offer') }})" style="cursor: pointer;">
                             <img id="delete{{$offer->id}}" src="delete.svg" alt="delete" @if($offer->active == true) style="filter: grayscale(100%)" @endif >
                         </a>
                     </div>
@@ -98,10 +98,10 @@
                 }
             });
     }
-    function deleteOffer(offerId) {
+    function deleteOffer(offerId, message) {
         img = document.getElementById('delete' + offerId);
         if(img.style.filter=='grayscale(100%)'){
-            alert('{{ __('You cannot delete active offers') }}');
+            alert(message);
             return;
         }
         location.href = '/offer/delete/' + offerId;
