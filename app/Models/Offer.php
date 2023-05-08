@@ -14,6 +14,8 @@ class Offer extends Model
         'condition',
         'price',
         'description',
+        'phone_number',
+        'city',
     ];
     public $timestamps = false;
 }

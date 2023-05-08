@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('condition');
             $table->float('price');
             $table->string('description');
+            $table->string('phone_number');
+            $table->string('city');
             $table->integer('seller_id')->foreign()->references('id')->on('users');
             $table->boolean('active')->default(true);
             $table->timestamp('offer_creation_date');

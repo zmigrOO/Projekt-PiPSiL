@@ -77,6 +77,21 @@
                                 min="1" name="price" :value="old('price')" required />
                             <x-input-error :messages="$errors->get('price')" class="mt-2" />
                         </div>
+                        <!-- Phone number -->
+                        <div class="mt-4">
+                            <x-input-label for="phone" :value="__('phone number')" />
+                            <x-text-input id="phone" class="block mt-1 w-full" type="tel" name="phone" placeholder="xxx-xxx-xxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
+                                :value="old('phone')" required />
+                            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+                          </div>
+                        <!-- City -->
+                        <div class="mt-4">
+                            <x-input-label for="city" :value="__('city')" />
+                            <x-text-input id="city" class="block mt-1 w-full" type="text" name="city"
+                                          :value="old('city')" required autofocus autocomplete="city" />
+                            <x-input-error :messages="$errors->get('city')" class="mt-2" />
+                        </div>
+
                         <div class="flex items-center justify-end mt-4">
                             <x-primary-button class="ml-4">
                                 {{ __('save') }}

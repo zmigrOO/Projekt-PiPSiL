@@ -10,6 +10,10 @@
                     <h1 class="text-2xl font-bold mb-2 dark:text-slate-50">{{ $offer->name }}</h1>
                     <p class="text-gray-600 mb-4 dark:text-gray-400">{{ __('condition') }}: {{ $offer->condition }}</p>
                     <p class="text-gray-600 mb-4 dark:text-gray-400">{{ __('seller') }} {{ $offer->seller->name }}</p>
+                    <p class="text-gray-600 mb-4 dark:text-gray-400">{{ __('city:') }} {{ $offer->city }}</p>
+                    <p class="text-gray-600 mb-4 dark:text-gray-400">{{ __('phone number:') }} {{ substr($offer->phone_number, 0, 3) }}-{{ substr($offer->phone_number, 3, 3) }}-{{ substr($offer->phone_number, 6, 3) }}</p>
+
+
 
                     <div class="flex items-center mb-4">
                         <span class="text-lg font-bold mr-2 dark:text-slate-50">{{ __('price') }}: ${{ $offer->price }}</span>

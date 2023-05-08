@@ -86,6 +86,8 @@ class OfferController extends Controller
         $offer->quantity = $request->input('quantity');
         $offer->price = $request->input('price');
         $offer->condition = $request->input('condition');
+        $offer->phone_number = str_replace('-', '', ($request->input('phone')));
+        $offer->city = $request->input('city');
         $offer->category_id = $request->input('category');
         $offer->offer_creation_date = now();
         $offer->seller_id = Auth::user()->id;
