@@ -25,6 +25,8 @@ Route::get('/my-offers', [OfferController::class, 'showMine'])->middleware(['aut
 Route::get('/new', [OfferController::class, 'new'])->middleware(['auth', 'verified'])->name('new');
 
 Route::post('/submit-new', [OfferController::class, 'add'])->middleware(['auth', 'verified']);
+Route::get('/edit/{id}', [OfferController::class, 'edit'])->middleware(['auth', 'verified']);
+Route::post('/edit/{id}', [OfferController::class, 'saveEdit'])->middleware(['auth', 'verified']);
 
 Route::get('/watched', [OfferController::class, 'wishlist'])->middleware(['auth', 'verified'])->name('watched-offers');
 

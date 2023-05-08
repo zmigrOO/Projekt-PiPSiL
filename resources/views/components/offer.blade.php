@@ -41,18 +41,22 @@
             @if (Route::currentRouteName() == 'my-offers')
                 <div class="absolute right-5 bottom-5">
                     <div class="h-1/3 w-fit float-left">
-                        <a style="cursor: pointer;">
+                        <a href="/edit/{{$offer->id}}" style="cursor: pointer;">
                             <img src="edit.svg" alt="edit">
                         </a>
                     </div>
                     <div class="h-1/3 w-fit float-left">
-                        <a onclick="toggleActive({{$offer->id}})" style="cursor: pointer">
-                            <img id="soft{{ $offer->id }}" src="@if($offer->active == true)deactivate.svg @else activate.svg @endif" alt="deactivate" style="cursor: pointer;">
+                        <a onclick="toggleActive({{ $offer->id }})" style="cursor: pointer">
+                            <img id="soft{{ $offer->id }}"
+                                src="@if ($offer->active == true) deactivate.svg @else activate.svg @endif"
+                                alt="deactivate" style="cursor: pointer;">
                         </a>
                     </div>
                     <div class="h-1/3 w-fit float-left">
-                        <a onclick="deleteOffer({{$offer->id}}, {{ __('You cannot delete an active offer') }})" style="cursor: pointer;">
-                            <img id="delete{{$offer->id}}" src="delete.svg" alt="delete" @if($offer->active == true) style="filter: grayscale(100%)" @endif >
+                        <a onclick="deleteOffer({{ $offer->id }}, {{ __('You cannot delete an active offer') }})"
+                            style="cursor: pointer;">
+                            <img id="delete{{ $offer->id }}" src="delete.svg" alt="delete"
+                                @if ($offer->active == true) style="filter: grayscale(100%)" @endif>
                         </a>
                     </div>
                 </div>
@@ -78,6 +82,7 @@
                 }
             });
     }
+
     function toggleActive(offerId) {
         img = document.getElementById('soft' + offerId);
         del = document.getElementById('delete' + offerId);
@@ -98,9 +103,10 @@
                 }
             });
     }
+
     function deleteOffer(offerId, message) {
         img = document.getElementById('delete' + offerId);
-        if(img.style.filter=='grayscale(100%)'){
+        if (img.style.filter == 'grayscale(100%)') {
             alert(message);
             return;
         }

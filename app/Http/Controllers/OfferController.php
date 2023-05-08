@@ -18,12 +18,10 @@ use Illuminate\Support\Facades\DB;
  */
 class OfferController extends Controller
 {
-    //create offer
     public function create()
     {
         return view('offers.create');
     }
-    //show offer
     public function showAll()
     {
         //get all offers and to each offer add category, image where order == 0 and boolean if offer is watched by current user
@@ -44,7 +42,6 @@ class OfferController extends Controller
         return view('offers', ['offers' => $offers]);
         // return view('offers')->with('offers', $offers)->with('authenticated', $authenticated);
     }
-
     public function showMine()
     {
         $offerIDs = Offer::where('seller_id', Auth::user()->id)->get('id');
@@ -76,7 +73,6 @@ class OfferController extends Controller
         ];
         return view('new-offer', ['attributes' => $attributes]);
     }
-
     public function add(Request $request): RedirectResponse
     {
         //get data from request, but pass category as its id
@@ -159,9 +155,13 @@ class OfferController extends Controller
     }
     public function edit($id)
     {
+        if (Auth::user()->id != Offer::where('id', $id)->first()->seller_id) {
+            return redirect()->back();
+        }
         //get offer and its images
         $offer = Offer::where('id', $id)->first();
         $offer->images = image::where('offer_id', $offer->id)->orderBy('order', 'asc')->get();
+        $offer->category = Category::where('id', $offer->category_id)->first();
         $conditions = [
             'Brand new',
             'Like new',
@@ -177,7 +177,24 @@ class OfferController extends Controller
             'conditions' => $conditions,
             'categories' => $categories
         ];
-        return view('edit-offer', ['offer' => $offer, 'attributes' => $attributes]);
+        return view('components.edit-offer', ['offer' => $offer, 'attributes' => $attributes]);
+    }
+    public function saveEdit(Request $request)
+    {
+        //get data from request, but pass category as its id
+        $offer = Offer::where('id', $request->input('id'))->first();
+        $offer->name = $request->input('name');
+        $offer->description = $request->input('description');
+        $offer->quantity = $request->input('quantity');
+        $offer->price = $request->input('price');
+        $offer->condition = $request->input('condition');
+        $offer->phone_number = str_replace('-', '', ($request->input('phone')));
+        $offer->city = $request->input('city');
+        $offer->category_id = $request->input('category');
+
+
+        $offer->save();
+        return redirect(route("my-offers"));
     }
     public function softDeleteToggle($id)
     {

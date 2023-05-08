@@ -1,7 +1,8 @@
+<!-- I begin to speak only when I am certain what I will say is not better left unsaid. - Cato the Younger -->
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('create') }}
+            {{ __('Edit') }}
         </h2>
     </x-slot>
 
@@ -9,21 +10,20 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form method="POST" action='/submit-new'>
+                    <form method="POST" action='/edit/{{$offer->id}}'>
                         @csrf
-
+                        <input type="hidden" name="id" value="{{$offer->id}}">
                         <!-- Name -->
                         <div>
                             <x-input-label for="name" :value="__('name')" />
-                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name"
-                                :value="old('name')" required autofocus autocomplete="name" />
+                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="$offer->name" required autofocus autocomplete="name" />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
 
                         <!-- Category -->
                         <div class="mt-4">
                             <x-input-label for="category" :value="__('category')" />
-                            <x-select-option :options="$attributes['categories']" :name="'category'" required />
+                            <x-select-option :options="$attributes['categories']" :current="$offer->category->name" :name="'category'" required />
                             <x-input-error :messages="$errors->get('category')" class="mt-2" />
                         </div>
 
@@ -31,7 +31,7 @@
                         <div class="mt-4">
                             <x-input-label for="description" :value="__('description')" />
                             <x-text-input onsubmit="descTrim()" id="description" class="block mt-1 w-full" type="text" name="description"
-                                :value="old('description')" required />
+                                :value="$offer->description" required />
                             <div class="mt-2 text-sm text-gray-500">
                                 <span id="description-counter">0</span> / 50 {{__('characters_entered')}}
                             </div>
@@ -58,15 +58,14 @@
                         <!-- Condition -->
                         <div class="mt-4">
                             <x-input-label for="condition" :value="__('condition')" />
-                            <x-select-option :options="$attributes['conditions']" :name="'condition'" required />
+                            <x-select-option :options="$attributes['conditions']" :current="$offer->condition" :name="'condition'" required />
                             <x-input-error :messages="$errors->get('condition')" class="mt-2" />
                         </div>
 
                         <!-- Quantity -->
                         <div class="mt-4">
                             <x-input-label for="quantity" :value="__('quantity')" />
-                            <x-text-input id="quantity" class="block mt-1 w-full" type="number" min="1"
-                                name="quantity" :value="1" required />
+                            <x-text-input id="quantity" class="block mt-1 w-full" type="number" min="1" name="quantity" :value="$offer->quantity" required />
                             <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
                         </div>
 
@@ -74,21 +73,21 @@
                         <div class="mt-4">
                             <x-input-label for="price" :value="__('price')" />
                             <x-text-input id="price" class="block mt-1 w-full" type="number" step="0.01"
-                                min="1" name="price" :value="old('price')" required />
+                                min="1" name="price" :value="$offer->price" required />
                             <x-input-error :messages="$errors->get('price')" class="mt-2" />
                         </div>
                         <!-- Phone number -->
                         <div class="mt-4">
                             <x-input-label for="phone" :value="__('phone number')" />
-                            <x-text-input id="phone" class="block mt-1 w-full" type="tel" name="phone" placeholder="xxx-xxx-xxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
-                                :value="old('phone')" required />
+                            <x-text-input id="phone" class="block mt-1 w-full" type="tel" name="phone" placeholder="xxx-xxx-xxx" pattern="[0-9]{9}"
+                                :value="$offer->phone_number" required />
                             <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                           </div>
                         <!-- City -->
                         <div class="mt-4">
                             <x-input-label for="city" :value="__('city')" />
                             <x-text-input id="city" class="block mt-1 w-full" type="text" name="city"
-                                          :value="old('city')" required autofocus autocomplete="city" />
+                                          :value="$offer->city" required autofocus autocomplete="city" />
                             <x-input-error :messages="$errors->get('city')" class="mt-2" />
                         </div>
 
