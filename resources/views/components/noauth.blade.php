@@ -22,7 +22,7 @@
             <img class="dark:invert m-2" src="filter.svg" alt="search" >
         </a>
     </div>
-    
+
     <div>
         <div
             class="z-10 mx-auto px-4 abs sm:px-6 top-0 left-0 fixed w-full lg:px-8 bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
@@ -66,9 +66,9 @@
 
             <!-- Responsive Text Input and Submit Button -->
             @if(Route::currentRouteName() == 'offers')
-            <div class="p-4 text-center z-0 sm:z-20 relative sm:fixed top-16 sm:top-0 -translate-x-1/2 w-full sm:w-auto" style="left: 50%">
+            <form action="/search" method="get" class="p-4 text-center z-0 sm:z-20 relative sm:fixed top-16 sm:top-0 -translate-x-1/2 w-full sm:w-auto" style="left: 50%">
                 <div class="flex-none float-left w-fit">
-                    <x-text-input id="name" class="sm:w-80 h-10" type="text" name="name" autofocus
+                    <x-text-input id="search" class="sm:w-80 h-10" type="text" name="search" autofocus
                         placeholder="Search" />
                 </div>
                 <div class="flex-none float-right">
@@ -76,7 +76,7 @@
                         {{ __('Search') }}
                     </x-primary-button>
                 </div>
-            </div>
+            </form>
             @endif
 
             <!-- Page Content -->

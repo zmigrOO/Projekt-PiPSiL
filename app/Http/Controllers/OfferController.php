@@ -25,7 +25,8 @@ class OfferController extends Controller
     public function showAll()
     {
         //get all offers and to each offer add category, image where order == 0 and boolean if offer is watched by current user
-        $offers = Offer::all();
+        $offerIDs = Offer::where('active', true)->get('id');
+        $offers = Offer::whereIn('id', $offerIDs)->get();
         foreach ($offers as $offer) {
             $offer->category = Category::where('id', $offer->category_id)->first();
             $offer->image = image::where('offer_id', $offer->id)->where('order', 0)->first();
@@ -41,6 +42,20 @@ class OfferController extends Controller
         //  dd($offers);
         return view('offers', ['offers' => $offers]);
         // return view('offers')->with('offers', $offers)->with('authenticated', $authenticated);
+    }
+    public function search(Request $request)
+    {
+        $phrase = $request->input('search');
+        // dd($phrase);
+        $offerIDs = Offer::where('name', 'LIKE', '%' . $phrase . '%')->get('id');
+        $offers = Offer::whereIn('id', $offerIDs)->where('active', true)->get();
+        foreach ($offers as $offer) {
+            $offer->category = Category::where('id', $offer->category_id)->first();
+            $offer->image = image::where('offer_id', $offer->id)->where('order', 0)->first();
+            $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
+            $offer->auth = Auth::check() ? Auth::user()->id : null;
+        }
+        return view('offers', ['offers' => $offers]);
     }
     public function showMine()
     {
