@@ -18,6 +18,15 @@ use Illuminate\Support\Facades\DB;
  */
 class OfferController extends Controller
 {
+    public $conditions = [
+        'Brand new',
+        'Like new',
+        'Very good',
+        'Good',
+        'Acceptable',
+        'Used',
+        'For parts or not working'
+    ];
     public function create()
     {
         return view('offers.create');
@@ -39,9 +48,13 @@ class OfferController extends Controller
             }
             $offer->auth = Auth::check() ? Auth::user()->id : null;
         }
-        //  dd($offers);
-        return view('offers', ['offers' => $offers]);
-        // return view('offers')->with('offers', $offers)->with('authenticated', $authenticated);
+        $categories = Category::all();
+        $attributes = [
+            'offers' => $offers,
+            'categories' => $categories,
+            'conditions' => $this->conditions
+        ];
+        return view('offers', ['attributes' => $attributes]);
     }
     public function search(Request $request)
     {
@@ -52,10 +65,22 @@ class OfferController extends Controller
         foreach ($offers as $offer) {
             $offer->category = Category::where('id', $offer->category_id)->first();
             $offer->image = image::where('offer_id', $offer->id)->where('order', 0)->first();
-            $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
+            //check if user is logged in
+            if (Auth::check()) {
+                $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
+
+            } else {
+                $offer->watched = false;
+            }
             $offer->auth = Auth::check() ? Auth::user()->id : null;
         }
-        return view('offers', ['offers' => $offers]);
+        $categories = Category::all();
+        $attributes = [
+            'offers' => $offers,
+            'categories' => $categories,
+            'conditions' => $this->conditions
+        ];
+        return view('offers', ['attributes' => $attributes]);
     }
     public function showMine()
     {
@@ -71,19 +96,10 @@ class OfferController extends Controller
     }
     public function new()
     {
-        $conditions = [
-            'Brand new',
-            'Like new',
-            'Very good',
-            'Good',
-            'Acceptable',
-            'Used',
-            'For parts or not working'
-        ];
         $categories = Category::all();
         // attributes are composed of $conditions and $categories
         $attributes = [
-            'conditions' => $conditions,
+            'conditions' => $this->conditions,
             'categories' => $categories
         ];
         return view('new-offer', ['attributes' => $attributes]);
@@ -177,19 +193,10 @@ class OfferController extends Controller
         $offer = Offer::where('id', $id)->first();
         $offer->images = image::where('offer_id', $offer->id)->orderBy('order', 'asc')->get();
         $offer->category = Category::where('id', $offer->category_id)->first();
-        $conditions = [
-            'Brand new',
-            'Like new',
-            'Very good',
-            'Good',
-            'Acceptable',
-            'Used',
-            'For parts or not working'
-        ];
         $categories = Category::all();
         // attributes are composed of $conditions and $categories
         $attributes = [
-            'conditions' => $conditions,
+            'conditions' => $this->conditions,
             'categories' => $categories
         ];
         return view('components.edit-offer', ['offer' => $offer, 'attributes' => $attributes]);

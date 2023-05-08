@@ -17,12 +17,6 @@
 </head>
 
 <body class="font-sans w-full antialiased relative dark:bg-grey-900">
-    <div class="fixed bottom-2 left-2 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm h-fit w-fit">
-        <a class="cursor-pointer" onclick="document.getElementById('name').value = ''">
-            <img class="dark:invert m-2" src="filter.svg" alt="search" >
-        </a>
-    </div>
-
     <div>
         <div
             class="z-10 mx-auto px-4 abs sm:px-6 top-0 left-0 fixed w-full lg:px-8 bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
