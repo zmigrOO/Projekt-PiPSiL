@@ -53,7 +53,7 @@
                         </a>
                     </div>
                     <div class="h-1/3 w-fit float-left">
-                        <a onclick="deleteOffer({{ $offer->id }}, {{ __('You cannot delete an active offer') }})"
+                        <a onclick="deleteOffer({{ $offer->id }}, '{{ __('You cannot delete an active offer') }}')"
                             style="cursor: pointer;">
                             <img id="delete{{ $offer->id }}" src="delete.svg" alt="delete"
                                 @if ($offer->active == true) style="filter: grayscale(100%)" @endif>

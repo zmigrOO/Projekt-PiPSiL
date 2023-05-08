@@ -17,6 +17,12 @@
 </head>
 
 <body class="font-sans w-full antialiased relative dark:bg-grey-900">
+    <div class="fixed bottom-2 left-2 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm h-fit w-fit">
+        <a class="cursor-pointer" onclick="document.getElementById('name').value = ''">
+            <img class="dark:invert m-2" src="filter.svg" alt="search" >
+        </a>
+    </div>
+    
     <div>
         <div
             class="z-10 mx-auto px-4 abs sm:px-6 top-0 left-0 fixed w-full lg:px-8 bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
@@ -60,8 +66,8 @@
 
             <!-- Responsive Text Input and Submit Button -->
             @if(Route::currentRouteName() == 'offers')
-            <div class=" p-4 text-center z-0 sm:z-20 relative sm:fixed top-16 sm:top-0 -translate-x-1/2 w-full sm:w-fit" style="left: 50%">
-                <div class="flex-none float-left w-auto">
+            <div class="p-4 text-center z-0 sm:z-20 relative sm:fixed top-16 sm:top-0 -translate-x-1/2 w-full sm:w-auto" style="left: 50%">
+                <div class="flex-none float-left w-fit">
                     <x-text-input id="name" class="sm:w-80 h-10" type="text" name="name" autofocus
                         placeholder="Search" />
                 </div>
@@ -69,15 +75,12 @@
                     <x-primary-button class="h-10 ml-2">
                         {{ __('Search') }}
                     </x-primary-button>
-
                 </div>
-
-
             </div>
             @endif
 
             <!-- Page Content -->
-            <main class="mt-14 sm:mt-0">
+            <main class="mt-16 sm:mt-16">
                 {{ $slot }}
             </main>
         </div>
