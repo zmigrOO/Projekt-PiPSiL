@@ -1,17 +1,17 @@
 @props(['offer'])
-<div>
+<div class="rounded-lg border-solid border-gray-100 dark:border-gray-700 border-4">
     <!-- Always remember that you are absolutely unique. Just like everyone else. - Margaret Mead -->
 
 
 
     <div class="flex font-sans py-2" style="height: 25vh">
-        <div class="flex-none w-56 relative rounded-lg overflow-hidden" style="max-width: 30vw">
+        <div class="flex-none w-56 relative rounded-lg overflow-hidden" style="max-width: 25vw">
             <a href="/offers/{{ $offer->id }}">
                 <img src="/images/samolot.bmp" alt=""
                     class=".hover:scale-110 absolute inset-0 w-full h-full object-cover" loading="lazy" />
             </a>
         </div>
-        <form class="flex-auto px-6">
+        <form class="flex-auto px-6 relative">
             <div class="flex flex-wrap relative">
                 <h1 class="flex-auto font-medium text-4xl pb-6 text-gray-900 dark:text-gray-100 ">
                     <a href="/offers/{{ $offer->id }}">
@@ -38,13 +38,31 @@
                     @endif
                 @endif
             </div>
+            @if (Route::currentRouteName() == 'my-offers')
+                <div class="absolute right-5 bottom-5">
+                    <div class="h-1/3 w-fit float-left">
+                        <a style="cursor: pointer;">
+                            <img src="edit.svg" alt="edit">
+                        </a>
+                    </div>
+                    <div class="h-1/3 w-fit float-left">
+                        <a onclick="toggleActive({{$offer->id}})" style="cursor: pointer">
+                            <img id="soft{{ $offer->id }}" src="@if($offer->active == true)deactivate.svg @else activate.svg @endif" alt="deactivate" style="cursor: pointer;">
+                        </a>
+                    </div>
+                    <div class="h-1/3 w-fit float-left">
+                        <a onclick="deleteOffer({{$offer->id}})" style="cursor: pointer;">
+                            <img id="delete{{$offer->id}}" src="delete.svg" alt="delete" @if($offer->active == true) style="filter: grayscale(100%)" @endif >
+                        </a>
+                    </div>
+                </div>
+            @endif
         </form>
     </div>
 </div>
 <script>
-    console.log({{ $offer->auth }} + ' ' + {{ $offer->seller_id }});
-
-    function watchOffer(offerId, img) {
+    function watchOffer(offerId) {
+        img = document.getElementById('img' + offerId);
         fetch('/watch/' + offerId)
             .then(function(response) {
                 return response.json();
@@ -60,12 +78,41 @@
                 }
             });
     }
+    function toggleActive(offerId) {
+        img = document.getElementById('soft' + offerId);
+        del = document.getElementById('delete' + offerId);
+        fetch('/toggleActive/' + offerId)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(response) {
+                // update the image src based on the response
+                if (response.active == true) {
+                    img.src = 'deactivate.svg';
+                    del.style.filter = 'grayscale(100%)';
+                    // console.log('fav.svg');
+                } else {
+                    img.src = 'activate.svg';
+                    del.style.filter = 'grayscale(0%)';
+                    // console.log('nfav.svg');
+                }
+            });
+    }
+    function deleteOffer(offerId) {
+        img = document.getElementById('delete' + offerId);
+        if(img.style.filter=='grayscale(100%)'){
+            alert('{{ __('You cannot delete active offers') }}');
+            return;
+        }
+        location.href = '/offer/delete/' + offerId;
+    }
 </script>
 <style>
     a img:hover {
         transform: scale(1.1);
     }
-    a img{
+
+    a img {
         transition: .5s;
     }
 </style>

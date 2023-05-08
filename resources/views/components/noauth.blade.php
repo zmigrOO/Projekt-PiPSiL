@@ -19,7 +19,7 @@
 <body class="font-sans w-full antialiased relative dark:bg-grey-900">
     <div>
         <div
-            class="max-w-7xl z-10 mx-auto px-4 abs sm:px-6 top-0 left-0 fixed w-full lg:px-8 bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+            class="z-10 mx-auto px-4 abs sm:px-6 top-0 left-0 fixed w-full lg:px-8 bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <!-- Logo -->

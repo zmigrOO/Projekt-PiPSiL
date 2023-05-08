@@ -20,6 +20,7 @@ return new class extends Migration
             $table->float('price');
             $table->string('description');
             $table->integer('seller_id')->foreign()->references('id')->on('users');
+            $table->boolean('active')->default(true);
             $table->timestamp('offer_creation_date');
             $table->timestamp('offer_expiration_date')->default(DB::raw('DATE_ADD(offer_creation_date, INTERVAL 30 DAY)'));
         });

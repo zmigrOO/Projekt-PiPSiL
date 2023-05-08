@@ -146,8 +146,48 @@ class OfferController extends Controller
             $watchedOffer->save();
             $watched = true;
         }
-        //redirect to the view user came from
-        // return redirect()->back();
         return response()->json(['watched' => $watched]);
     }
+    public function delete($id)
+    {
+        //delete offer and all its images
+        Offer::where('id', $id)->delete();
+        image::where('offer_id', $id)->delete();
+        return redirect()->back();
+    }
+    public function edit($id)
+    {
+        //get offer and its images
+        $offer = Offer::where('id', $id)->first();
+        $offer->images = image::where('offer_id', $offer->id)->orderBy('order', 'asc')->get();
+        $conditions = [
+            'Brand new',
+            'Like new',
+            'Very good',
+            'Good',
+            'Acceptable',
+            'Used',
+            'For parts or not working'
+        ];
+        $categories = Category::all();
+        // attributes are composed of $conditions and $categories
+        $attributes = [
+            'conditions' => $conditions,
+            'categories' => $categories
+        ];
+        return view('edit-offer', ['offer' => $offer, 'attributes' => $attributes]);
+    }
+    public function softDeleteToggle($id)
+    {
+        //soft delete offer
+        $offer = Offer::where('id', $id)->first();
+        if ($offer->active) {
+            Offer::where('id', $id)->update(['active' => false]);
+            return response()->json(['active' => false]);
+        } else {
+            Offer::where('id', $id)->update(['active' => true]);
+            return response()->json(['active' => true]);
+        }
+    }
+
 }

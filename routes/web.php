@@ -29,6 +29,8 @@ Route::post('/submit-new', [OfferController::class, 'add'])->middleware(['auth',
 Route::get('/watched', [OfferController::class, 'wishlist'])->middleware(['auth', 'verified'])->name('watched-offers');
 
 Route::get('/watch/{id}', [OfferController::class, 'wishChange'])->middleware(['auth', 'verified']);
+Route::get('/toggleActive/{id}', [OfferController::class, 'softDeleteToggle'])->middleware(['auth', 'verified']);
+Route::get('/offer/delete/{id}', [OfferController::class, 'delete'])->middleware(['auth', 'verified']);
 
 Route::get('/home', function () {
     return view('dashboard');
