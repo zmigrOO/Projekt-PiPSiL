@@ -34,7 +34,7 @@ class OfferController extends Controller
         'good' => 'Dobry',
         'acceptable' => 'Akceptowalny',
         'used' => 'Używany',
-        'for_parts_or_not_working' => 'Do części lub naprawy'
+        'for_parts_or_not_working' => 'Na części lub do naprawy'
     ];
     public function create()
     {
