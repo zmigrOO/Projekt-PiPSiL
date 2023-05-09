@@ -19,13 +19,13 @@ use Illuminate\Support\Facades\DB;
 class OfferController extends Controller
 {
     public $conditions = [
-        'new' => 'Nowy',
-        'like_new' => 'Jak nowy',
-        'very_good' => 'Bardzo dobry',
-        'good' => 'Dobry',
-        'acceptable' => 'Akceptowalny',
-        'used' => 'Używany',
-        'for_parts_or_not_working' => 'Do części lub naprawy'
+        'Brand new',
+        'Like new',
+        'Very good',
+        'Good',
+        'Acceptable',
+        'Used',
+        'For parts or not working'
     ];
     public function create()
     {
@@ -51,7 +51,7 @@ class OfferController extends Controller
         $categories = Category::all();
         $attributes = [
             'offers' => $offers,
-            'offerIDs' => $offerIDs->toArray(),
+            'offerIDs' => $offerIDs,
             'categories' => $categories,
             'conditions' => $this->conditions
         ];
@@ -134,7 +134,7 @@ class OfferController extends Controller
         $offer->images = image::where('offer_id', $offer->id)->orderBy('order', 'asc')->get();
         if (Auth::check()) {
             $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
-        }else{
+        } else {
             $offer->watched = false;
         }
         $offer->seller = User::where('id', $offer->seller_id)->first();
