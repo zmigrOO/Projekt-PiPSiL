@@ -12,101 +12,6 @@
 
 namespace App\Models{
 /**
- * App\Models\Category
- *
- * @property int $id
- * @property string $name
- * @property int|null $parent_category_id
- * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Category query()
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereParentCategoryId($value)
- */
-	class Category extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\Image
- *
- * @property int $offer_id
- * @property int $order
- * @property string $path
- * @method static \Illuminate\Database\Eloquent\Builder|Image newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Image newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Image query()
- * @method static \Illuminate\Database\Eloquent\Builder|Image whereOfferId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Image whereOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Image wherePath($value)
- */
-	class Image extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\Offer
- *
- * @property int $id
- * @property int $category_id
- * @property string $name
- * @property int $quantity
- * @property string $condition
- * @property float $price
- * @property string $description
- * @property string $phone_number
- * @property string $city
- * @property int $seller_id
- * @property int $active
- * @property string $offer_creation_date
- * @property string $offer_expiration_date
- * @method static \Database\Factories\OfferFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|Offer newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Offer newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Offer query()
- * @method static \Illuminate\Database\Eloquent\Builder|Offer whereActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Offer whereCategoryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Offer whereCity($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Offer whereCondition($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Offer whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Offer whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Offer whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Offer whereOfferCreationDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Offer whereOfferExpirationDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Offer wherePhoneNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Offer wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Offer whereQuantity($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Offer whereSellerId($value)
- */
-	class Offer extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\Opinion
- *
- * @property int $offer_id
- * @property int $user_id
- * @property string $content
- * @property int $rating
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|Opinion newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Opinion newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Opinion query()
- * @method static \Illuminate\Database\Eloquent\Builder|Opinion whereContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Opinion whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Opinion whereOfferId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Opinion whereRating($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Opinion whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Opinion whereUserId($value)
- */
-	class Opinion extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
  * App\Models\User
  *
  * @property int $id
@@ -139,16 +44,103 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * App\Models\WatchedOffer
+ * App\Models\cathegory
+ *
+ * @property int $id
+ * @property string $name
+ * @property int|null $parent_cathegory_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereParentCathegoryId($value)
+ */
+	class cathegory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\image
+ *
+ * @property int $offer_id
+ * @property int $order
+ * @property mixed $Image
+ * @method static \Illuminate\Database\Eloquent\Builder|image newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|image newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|image query()
+ * @method static \Illuminate\Database\Eloquent\Builder|image whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|image whereOfferId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|image whereOrder($value)
+ */
+	class image extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\offer
+ *
+ * @property int $id
+ * @property int $category_id
+ * @property string $name
+ * @property int $quantity
+ * @property string $condition
+ * @property float $price
+ * @property string $description
+ * @property int $seller_id
+ * @property string $offer_creation_date
+ * @property string $offer_expiration_date
+ * @method static \Database\Factories\offerFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|offer newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|offer newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|offer query()
+ * @method static \Illuminate\Database\Eloquent\Builder|offer whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|offer whereCondition($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|offer whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|offer whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|offer whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|offer whereOfferCreationDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|offer whereOfferExpirationDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|offer wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|offer whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|offer whereSellerId($value)
+ */
+	class offer extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\opinion
  *
  * @property int $offer_id
  * @property int $user_id
- * @method static \Illuminate\Database\Eloquent\Builder|WatchedOffer newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|WatchedOffer newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|WatchedOffer query()
- * @method static \Illuminate\Database\Eloquent\Builder|WatchedOffer whereOfferId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WatchedOffer whereUserId($value)
+ * @property string $content
+ * @property int $rating
+ * @property string $opinion_creation_date
+ * @method static \Illuminate\Database\Eloquent\Builder|opinion newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|opinion newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|opinion query()
+ * @method static \Illuminate\Database\Eloquent\Builder|opinion whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|opinion whereOfferId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|opinion whereOpinionCreationDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|opinion whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|opinion whereUserId($value)
  */
-	class WatchedOffer extends \Eloquent {}
+	class opinion extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\watchedOffer
+ *
+ * @property int $offer_id
+ * @property int $user_id
+ * @method static \Illuminate\Database\Eloquent\Builder|watchedOffer newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|watchedOffer newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|watchedOffer query()
+ * @method static \Illuminate\Database\Eloquent\Builder|watchedOffer whereOfferId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|watchedOffer whereUserId($value)
+ */
+	class watchedOffer extends \Eloquent {}
 }
 
