@@ -38,21 +38,23 @@
             @if (Route::currentRouteName() == 'my-offers')
                 <div class="absolute right-5 bottom-5">
                     <div class=" h-1/3 w-fit float-left">
-                        <a title="{{__('Edit')}}" href="/edit/{{$offer->id}}" style="cursor: pointer;">
+                        <a title="{{ __('Edit') }}" href="/edit/{{ $offer->id }}" style="cursor: pointer;">
                             <img src="edit.svg" alt="edit">
                         </a>
                     </div>
                     <div class=" h-1/3 w-fit float-left">
-                        <a title="{{$offer->active ? __('Deactivate'): __('Activate')}}" onclick="toggleActive({{ $offer->id }}, this)" style="cursor: pointer">
+                        <a title="{{ $offer->active ? __('Deactivate') : __('Activate') }}"
+                            onclick="toggleActive({{ $offer->id }}, this)" style="cursor: pointer">
                             <img id="soft{{ $offer->id }}"
                                 src="@if ($offer->active == true) deactivate.svg @else activate.svg @endif"
                                 alt="deactivate" style="cursor: pointer;">
                         </a>
                     </div>
                     <div class=" h-1/3 w-fit float-left">
-                        <a title="{{__('Delete')}}" onclick="deleteOffer({{ $offer->id }}, '{{ __('cannot_delete_active_offer') }}')"
+                        <a title="{{ __('Delete') }}"
+                            onclick="deleteOffer({{ $offer->id }}, '{{ __('cannot_delete_active_offer') }}')"
                             style="cursor: pointer;">
-                            <img id="delete{{ $offer->id }}" src="delete.svg" alt="delete"
+                            <img id="delete{{ $offer->id }}" class="dark:invert" src="delete.svg" alt="delete"
                                 @if ($offer->active == true) style="filter: grayscale(100%)" @endif>
                         </a>
                     </div>
@@ -92,13 +94,11 @@
                 if (response.active == true) {
                     img.src = 'deactivate.svg';
                     del.style.filter = 'grayscale(100%)';
-                    toggle.title = '{{__('Deactivate')}}';
-                    // console.log('fav.svg');
+                    toggle.title = '{{ __('Deactivate') }}';
                 } else {
                     img.src = 'activate.svg';
                     del.style.filter = 'grayscale(0%)';
-                    toggle.title = '{{__('Activate')}}';
-                    // console.log('nfav.svg');
+                    toggle.title = '{{ __('Activate') }}';
                 }
             });
     }

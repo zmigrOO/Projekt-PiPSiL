@@ -36,7 +36,7 @@
             <h3 class="text-sm font-semibold dark:text-white">Categories</h3>
             @foreach ($attributes['categories'] as $category)
                 <label class="flex items-center dark:text-white">
-                    <input onchange="filter({{ $attributes['offerIDs'] }})" checked type="checkbox" name="category[]"
+                    <input onchange="filter({{ $attributes['offerIDs'] }})" type="checkbox" name="category[]"
                         value="{{ $category->id }}"
                         class="mr-1 checked:bg-blue-700 dark:bg-black rounded-lg dark:text-white">
                     <span class="text-sm dark:text-white">{{ $category->name }}</span>
@@ -55,7 +55,7 @@
             <h3 class="text-sm font-semibold mt-4 dark:text-white">Condition</h3>
             @foreach ($attributes['conditions'] as $condition)
                 <label class="flex items-center dark:text-white">
-                    <input onchange="filter({{ $attributes['offerIDs'] }})" checked type="checkbox" name="condition[]"
+                    <input onchange="filter({{ $attributes['offerIDs'] }})" type="checkbox" name="condition[]"
                         value="{{ $condition }}"
                         class="mr-1 dark:bg-black checked:bg-blue-700 rounded-lg dark:text-white">
                     <span class="text-sm dark:text-white">{{ $condition }}</span>
@@ -119,21 +119,21 @@
                 });
             }
             if (!(price_max == '' && price_min == '')) {
-                if (price_min != '') {
+                if (price_min != '' && price_max == '') {
                     offers.forEach(offer => {
-                        if (!(offer.getAttribute('price') > price_min)) {
+                        if (!(offer.getAttribute('price') >= price_min)) {
                             offer.classList.add('hidden');
                         }
                     });
-                } else if (price_max != '') {
+                } else if (price_max != '' && price_min == '') {
                     offers.forEach(offer => {
-                        if (!(offer.getAttribute('price') < price_max)) {
+                        if (!(offer.getAttribute('price') <= price_max)) {
                             offer.classList.add('hidden');
                         }
                     });
                 } else {
                     offers.forEach(offer => {
-                        if (!(offer.getAttribute('price') < price_max && offer.getAttribute('price') > price_min)) {
+                        if (!(offer.getAttribute('price') <= price_max && offer.getAttribute('price') >= price_min)) {
                             offer.classList.add('hidden');
                         }
                     });
