@@ -79,7 +79,7 @@
                         </div>
                         <!-- Phone number -->
                         <div class="mt-4">
-                            <x-input-label for="phone" :value="__('phone number')" />
+                            <x-input-label for="phone" :value="__('phone_number')" />
                             <x-text-input id="phone" class="block mt-1 w-full" type="tel" name="phone" placeholder="xxx-xxx-xxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
                                 :value="old('phone')" required />
                             <x-input-error :messages="$errors->get('phone')" class="mt-2" />

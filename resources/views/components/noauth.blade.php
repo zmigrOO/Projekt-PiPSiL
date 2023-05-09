@@ -44,15 +44,15 @@
                 <div class="fixed top-0 z-20 right-0 p-6 text-right">
                     @auth
                         <a href="{{ url('/home') }}"
-                            class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
+                            class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">{{ __('home') }}</a>
                     @else
                         <a href="{{ route('login') }}"
-                            class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
+                            class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">{{ __('login') }}
                             in</a>
 
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}"
-                                class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                                class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">{{ __('register') }}</a>
                         @endif
                     @endauth
                 </div>
@@ -63,7 +63,7 @@
             <form action="/search" method="get" class="p-4 text-center z-0 sm:z-20 relative sm:fixed top-16 sm:top-0 -translate-x-1/2 w-full sm:w-auto" style="left: 50%">
                 <div class="flex-none float-left w-fit">
                     <x-text-input id="search" class="sm:w-80 h-10" type="text" name="search" autofocus
-                        placeholder="Search" />
+                        placeholder="{{ __('Search') }}" />
                 </div>
                 <div class="flex-none float-right">
                     <x-primary-button class="h-10 ml-2">

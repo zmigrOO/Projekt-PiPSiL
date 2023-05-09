@@ -31,7 +31,7 @@
     "all_offers":"Wszystkie Oferty",
     "delete_account":"Usuń Konto",
     "account_deleted":"Kiedy twoje konto zostanie usunięte, wszystkie twoje dane również zostaną całkowicie usunięte. Przed usunięciem konta, prosimy - pobierz wszelkie dane lub informacje, których będziesz kiedykolwiek potrzebował.",
-    "password": "hasło",
+    "password": "Hasło",
     "sure":"Czy jesteś pewny, że chcesz usunąć swoje konto?",
     "Cancel":"Anuluj",
     "ensure":"Upewnij się, czy twoje konto posiada długie i bezpieczne hasło.",
@@ -51,7 +51,21 @@
     "Email_Password_Reset_Link":"Email z linkiem do zresetowania hasła",
     "Already_registered":"Już zarejestrowany/a?",
     "Reset_Password":"Zresetuj hasło",
-    "available:": "Dostępne:"
-
-
+    "available:": "Dostępne:",
+    "new": "Nowy",
+    "Like new": "Jak nowy",
+    "Very good": "Bardzo dobry",
+    "Good": "Dobry",
+    "Acceptable": "Zadowalający",
+    "Used": "Używany",
+    "For parts or not working": "Do części lub nie działa",
+    "phone_number":"Numer Telefonu",
+    "city":"Miasto",
+    "Edit":"Edytuj",
+    "Deactivate":"Dezaktywuj",
+    "Activate":"Aktywuj",
+    "Delete":"Usuń",
+    "cannot_delete_active_offer":"Nie możesz usunąć aktywnej oferty",
+    "Search":"Szukaj"
 }
+
