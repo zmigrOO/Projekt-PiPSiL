@@ -19,13 +19,13 @@ use Illuminate\Support\Facades\DB;
 class OfferController extends Controller
 {
     public $conditions = [
-        'Brand new',
-        'Like new',
-        'Very good',
-        'Good',
-        'Acceptable',
-        'Used',
-        'For parts or not working'
+        'new' => 'Nowy',
+        'like_new' => 'Jak nowy',
+        'very_good' => 'Bardzo dobry',
+        'good' => 'Dobry',
+        'acceptable' => 'Akceptowalny',
+        'used' => 'Używany',
+        'for_parts_or_not_working' => 'Do części lub naprawy'
     ];
     public function create()
     {

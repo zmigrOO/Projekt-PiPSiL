@@ -50,7 +50,7 @@
                         </a>
                     </div>
                     <div class=" h-1/3 w-fit float-left">
-                        <a title="{{__('Delete')}}" onclick="deleteOffer({{ $offer->id }}, '{{ __('You cannot delete an active offer') }}')"
+                        <a title="{{__('Delete')}}" onclick="deleteOffer({{ $offer->id }}, '{{ __('cannot_delete_active_offer') }}')"
                             style="cursor: pointer;">
                             <img id="delete{{ $offer->id }}" src="delete.svg" alt="delete"
                                 @if ($offer->active == true) style="filter: grayscale(100%)" @endif>
