@@ -1,9 +1,6 @@
 @props(['offer'])
 <div class="rounded-lg border-solid border-gray-100 dark:border-gray-700 border-4">
     <!-- Always remember that you are absolutely unique. Just like everyone else. - Margaret Mead -->
-
-
-
     <div class="flex font-sans py-2" style="height: 25vh">
         <div class="flex-none w-56 relative rounded-lg overflow-hidden" style="max-width: 25vw">
             <a href="/offers/{{ $offer->id }}">

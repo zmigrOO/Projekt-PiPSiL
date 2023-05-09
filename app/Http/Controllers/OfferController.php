@@ -51,6 +51,7 @@ class OfferController extends Controller
         $categories = Category::all();
         $attributes = [
             'offers' => $offers,
+            'offerIDs' => $offerIDs->toArray(),
             'categories' => $categories,
             'conditions' => $this->conditions
         ];
@@ -77,9 +78,11 @@ class OfferController extends Controller
         $categories = Category::all();
         $attributes = [
             'offers' => $offers,
+            'offerIDs' => $offerIDs,
             'categories' => $categories,
             'conditions' => $this->conditions
         ];
+        // dd($attributes);
         return view('offers', ['attributes' => $attributes]);
     }
     public function showMine()
