@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            $table->integer('category_id')->foreign()->references('id')->on('cathegories');
+            $table->integer('category_id')->foreign()->references('id')->on('categories');
             $table->string('name');
             $table->integer('quantity');
             $table->string('condition');

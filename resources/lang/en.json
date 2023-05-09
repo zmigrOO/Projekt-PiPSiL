@@ -51,5 +51,20 @@
     "Email_Password_Reset_Link":"Email Password Reset Link",
     "Already_registered":"Already registered?",
     "Reset_Password":"Reset Password",
-    "available:": "Available:"
+    "available:": "Available:",
+    "new":"Brand New",
+    "Like new": "Like new",
+    "Very good": "Very good",
+    "Good": "Good",
+    "Acceptable": "Acceptable",
+    "Used": "Used",
+    "For parts or not working": "For parts or not working",
+    "phone_number":"Phone Number",
+    "city":"City",
+    "Edit":"Edit",
+    "Deactivate":"Deactivate",
+    "Activate":"Activate",
+    "Delete":"Delete",
+    "cannot_delete_active_offer":"You cannot delete an active offer",
+    "Search":"Search"
 }
