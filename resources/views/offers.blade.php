@@ -121,19 +121,19 @@
             if (!(price_max == '' && price_min == '')) {
                 if (price_min != '' && price_max == '') {
                     offers.forEach(offer => {
-                        if (!(offer.getAttribute('price') >= price_min)) {
+                        if (!(offer.getAttribute('price') >= Number.parseFloat(price_min))) {
                             offer.classList.add('hidden');
                         }
                     });
                 } else if (price_max != '' && price_min == '') {
                     offers.forEach(offer => {
-                        if (!(offer.getAttribute('price') <= price_max)) {
+                        if (!(offer.getAttribute('price') <= Number.parseFloat(price_max))) {
                             offer.classList.add('hidden');
                         }
                     });
                 } else {
                     offers.forEach(offer => {
-                        if (!(offer.getAttribute('price') <= price_max && offer.getAttribute('price') >= price_min)) {
+                        if (!(offer.getAttribute('price') <= Number.parseFloat(price_max) && offer.getAttribute('price') >= Number.parseFloat(price_min))) {
                             offer.classList.add('hidden');
                         }
                     });

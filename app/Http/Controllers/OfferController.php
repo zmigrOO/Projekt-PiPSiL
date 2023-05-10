@@ -142,6 +142,7 @@ class OfferController extends Controller
         foreach ($offer->opinions as $opinion) {
             $opinion->user = User::where('id', $opinion->user_id)->first();
         }
+        
         $offer->auth = Auth::check() ? Auth::user()->id : null;
         // dd($offer);
         return view('components.offer-layout', ['offer' => $offer]);
