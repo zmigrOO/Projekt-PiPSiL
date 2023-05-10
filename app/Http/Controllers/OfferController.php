@@ -61,7 +61,7 @@ class OfferController extends Controller
     {
         $phrase = $request->input('search');
         // dd($phrase);
-        $offerIDs = Offer::where('name', 'LIKE', '%' . $phrase . '%')->get('id');
+        $offerIDs = Offer::where('name', 'LIKE', '%' . $phrase . '%')->orWhere('description', 'LIKE', '%' . $phrase . '%')->get('id');
         $offers = Offer::whereIn('id', $offerIDs)->where('active', true)->get();
         foreach ($offers as $offer) {
             $offer->category = Category::where('id', $offer->category_id)->first();

@@ -11,21 +11,25 @@
                     <p class="text-gray-600 mb-4 dark:text-gray-400">{{ __('condition') }}: {{ $offer->condition }}</p>
                     <p class="text-gray-600 mb-4 dark:text-gray-400">{{ __('seller') }} {{ $offer->seller->name }}</p>
                     <p class="text-gray-600 mb-4 dark:text-gray-400">{{ __('city') }}: {{ $offer->city }}</p>
-                    <p class="text-gray-600 mb-4 dark:text-gray-400">{{ __('phone_number') }}: {{ substr($offer->phone_number, 0, 3) }}-{{ substr($offer->phone_number, 3, 3) }}-{{ substr($offer->phone_number, 6, 3) }}</p>
+                    <p class="text-gray-600 mb-4 dark:text-gray-400">{{ __('phone_number') }}:
+                        {{ substr($offer->phone_number, 0, 3) }}-{{ substr($offer->phone_number, 3, 3) }}-{{ substr($offer->phone_number, 6, 3) }}
+                    </p>
 
 
 
                     <div class="flex items-center mb-4">
-                        <span class="text-lg font-bold mr-2 dark:text-slate-50">{{ __('price') }}: ${{ $offer->price }}</span>
+                        <span class="text-lg font-bold mr-2 dark:text-slate-50">{{ __('price') }}:
+                            ${{ $offer->price }}</span>
                     </div>
                     @if ($offer->auth != null)
                         @if ($offer->auth != $offer->seller_id)
-                            <div class="absolute right-5 top-1">
+                            <div class="absolute right-5 top-1 transition-all active:scale-50">
                                 <a style="cursor: pointer;"
                                     onclick="watchOffer({{ $offer->id }}, document.getElementById('img{{ $offer->id }}'))">
-                                    <img id="img{{ $offer->id }}" class="dark:invert"
-                                        src="@if ($offer->watched == true) /fav.svg @else /nfav.svg @endif"
-                                        alt="favourite" class="w-5 h-5">
+                                    <img class="dark:invert relative transition-all hover:scale-110 z-20"
+                                        src="/nfav.svg" alt="favourite">
+                                    <img id="img{{ $offer->id }}" src="/fav.svg"
+                                        class="absolute z-10 top-0 transition-all hover:scale-110 @if ($offer->watched != true) opacity-0 @endif">
                                 </a>
                             </div>
                         @endif
@@ -80,7 +84,8 @@
     <script>
         console.log({{ $offer->seller_id }}{{ $offer->auth }})
 
-        function watchOffer(offerId, img) {
+        function watchOffer(offerId) {
+            img = document.getElementById('img' + offerId);
             fetch('/watch/' + offerId)
                 .then(function(response) {
                     return response.json();
@@ -88,10 +93,10 @@
                 .then(function(response) {
                     // update the image src based on the response
                     if (response.watched == true) {
-                        img.src = '/fav.svg';
+                        img.classList.remove('opacity-0');
                         // console.log('fav.svg');
                     } else {
-                        img.src = '/nfav.svg';
+                        img.classList.add('opacity-0');
                         // console.log('nfav.svg');
                     }
                 });

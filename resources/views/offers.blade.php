@@ -140,5 +140,53 @@
                 }
             }
         };
+    function watchOffer(offerId) {
+        img = document.getElementById('img' + offerId);
+        fetch('/watch/' + offerId)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(response) {
+                // update the image src based on the response
+                if (response.watched == true) {
+                    img.classList.remove('opacity-0');
+                    // console.log('fav.svg');
+                } else {
+                    img.classList.add('opacity-0');
+                    // console.log('nfav.svg');
+                }
+            });
+    }
+
+    function toggleActive(offerId, toggle) {
+        img = document.getElementById('soft' + offerId);
+        del = document.getElementById('delete' + offerId);
+        fetch('/toggleActive/' + offerId)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(response) {
+                // update the image src based on the response
+                if (response.active == true) {
+                    img.src = 'deactivate.svg';
+                    del.style.filter = 'grayscale(100%)';
+                    toggle.title = '{{ __('Deactivate') }}';
+                } else {
+                    img.src = 'activate.svg';
+                    del.style.filter = 'grayscale(0%)';
+                    toggle.title = '{{ __('Activate') }}';
+                }
+            });
+    }
+
+    function deleteOffer(offerId, message) {
+        img = document.getElementById('delete' + offerId);
+        if (img.style.filter == 'grayscale(100%)') {
+            alert(message);
+            return;
+        }
+        location.href = '/offer/delete/' + offerId;
+    }
+
     </script>
 </x-no-auth>
