@@ -18,15 +18,6 @@ use Illuminate\Support\Facades\DB;
  */
 class OfferController extends Controller
 {
-    // public $conditions = [
-    //     'Brand new',
-    //     'Like new',
-    //     'Very good',
-    //     'Good',
-    //     'Acceptable',
-    //     'Used',
-    //     'For parts or not working'
-    // ];
     public $conditions = [
         'new' => 'Nowy',
         'like_new' => 'Jak nowy',
@@ -176,6 +167,9 @@ class OfferController extends Controller
     }
     public function wishChange($id)
     {
+        if (Auth::user()->id == Offer::where('id',$id)->first()->seller_id) {
+            return;
+        }
         //if offer is watched by current user, delete it from watched offers, else add it to watched offers
         if (WatchedOffer::where('offer_id', $id)->where('user_id', Auth::user()->id)->exists()) {
             WatchedOffer::where('offer_id', $id)->where('user_id', Auth::user()->id)->delete();
@@ -192,6 +186,9 @@ class OfferController extends Controller
     public function delete($id)
     {
         //delete offer and all its images
+        if (Auth::user()->id != Offer::where('id', $id)->first()->seller_id || Offer::where('id', $id)->get('active') == true) {
+            return redirect()->back();
+        }
         Offer::where('id', $id)->delete();
         image::where('offer_id', $id)->delete();
         return redirect()->back();
@@ -203,6 +200,8 @@ class OfferController extends Controller
         }
         //get offer and its images
         $offer = Offer::where('id', $id)->first();
+
+
         $offer->images = image::where('offer_id', $offer->id)->orderBy('order', 'asc')->get();
         $offer->category = Category::where('id', $offer->category_id)->first();
         $categories = Category::all();
@@ -215,7 +214,12 @@ class OfferController extends Controller
     }
     public function saveEdit(Request $request)
     {
+
         //get data from request, but pass category as its id
+        if (Auth::user()->id != Offer::where('id', $request->input('id'))->first()->seller_id) {
+            return redirect()->back();
+        }
+
         $offer = Offer::where('id', $request->input('id'))->first();
         $offer->name = $request->input('name');
         $offer->description = $request->input('description');
@@ -232,6 +236,9 @@ class OfferController extends Controller
     }
     public function softDeleteToggle($id)
     {
+        if (Auth::user()->id != Offer::where('id' ,$id)->first()->seller_id) {
+            return;
+        }
         //soft delete offer
         $offer = Offer::where('id', $id)->first();
         if ($offer->active) {

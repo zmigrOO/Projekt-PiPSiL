@@ -16,7 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans w-full antialiased relative dark:bg-grey-900">
+<body class="font-sans w-full antialiased dark:bg-grey-900">
     <div>
         <div
             class="z-10 mx-auto px-4 abs sm:px-6 top-0 left-0 fixed w-full lg:px-8 bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
@@ -58,19 +58,28 @@
             @endif
 
             <!-- Responsive Text Input and Submit Button -->
-            @if(Route::currentRouteName() == 'offers')
-            <form action="/search" method="get" class="p-4 text-center z-0 sm:z-20 relative sm:fixed top-16 sm:top-0 -translate-x-1/2 w-full sm:w-auto" style="left: 50%">
-                <div class="flex-none float-left w-fit">
-                    <x-text-input id="search" class="sm:w-80 h-10" type="text" name="search" autofocus
-                        placeholder="{{ __('Search') }}" />
-                </div>
-                <div class="flex-none float-right">
-                    <x-primary-button class="h-10 ml-2">
-                        {{ __('Search') }}
-                    </x-primary-button>
-                </div>
-            </form>
+            @if (Route::currentRouteName() == 'offers')
+                <form action="/search" method="get"
+                    class="p-4 text-center z-0 sm:z-20 relative sm:fixed top-16 sm:top-0 -translate-x-1/2 w-full sm:w-auto"
+                    style="left: 50%">
+                    <div class="flex-none float-left w-fit">
+                        <x-text-input id="search" class="sm:w-80 h-10" type="text" name="search" autofocus
+                            placeholder="{{ __('Search') }}" />
+                    </div>
+                    <div class="flex-none float-right">
+                        <x-primary-button class="h-10 ml-2">
+                            {{ __('Search') }}
+                        </x-primary-button>
+                    </div>
+                </form>
             @endif
+            <!-- Location change element -->
+            <div class="fixed top-3 z-20 right-36">
+                <select name="lang" id="lang" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                    <option value="pl">pl</option>
+                    <option value="en">en</option>
+                </select>
+            </div>
 
             <!-- Page Content -->
             <main class="mt-16 sm:mt-16">
