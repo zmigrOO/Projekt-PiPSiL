@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Opinion extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'offer_id',
+        'user_id',
+        'content',
+        'rating',
+        'created_at',
+    ];
+
 }

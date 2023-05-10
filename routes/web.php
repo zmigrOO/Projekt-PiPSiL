@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OpinionController;
 use App\Models\offer;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,7 @@ Route::get('/new', [OfferController::class, 'new'])->middleware(['auth', 'verifi
 Route::post('/submit-new', [OfferController::class, 'add'])->middleware(['auth', 'verified']);
 Route::get('/edit/{id}', [OfferController::class, 'edit'])->middleware(['auth', 'verified']);
 Route::post('/edit/{id}', [OfferController::class, 'saveEdit'])->middleware(['auth', 'verified']);
+Route::post('/opinion', [OpinionController::class, 'add'])->middleware(['auth', 'verified']);
 
 Route::get('/watched', [OfferController::class, 'wishlist'])->middleware(['auth', 'verified'])->name('watched-offers');
 

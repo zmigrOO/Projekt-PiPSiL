@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\AttributeController;
 use App\Models\Category;
+use App\Models\Clothes;
+use App\Models\Computers;
+use App\Models\Electronics;
+use App\Models\Furniture;
 use App\Models\image;
 use App\Models\Offer;
 use App\Models\Opinion;
 use App\Models\User;
 use App\Models\WatchedOffer;
+use Attribute;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -142,7 +148,21 @@ class OfferController extends Controller
         foreach ($offer->opinions as $opinion) {
             $opinion->user = User::where('id', $opinion->user_id)->first();
         }
-
+        switch ($offer->category->name) {
+            case 'Computers':
+                $offer->attribs = Computers::where('offer_id', $id)->first();
+                break;
+            case 'Electronics':
+                $offer->attribs = Electronics::where('offer_id', $id)->first();
+                break;
+            case 'Furniture':
+                $offer->attribs = Furniture::where('offer_id', $id)->first();
+                break;
+            case 'Clothes':
+                $offer->attribs = Clothes::where('offer_id', $id)->first();
+                break;
+            default:
+        }
         $offer->auth = Auth::check() ? Auth::user()->id : null;
         // dd($offer);
         return view('components.offer-layout', ['offer' => $offer]);
@@ -168,7 +188,7 @@ class OfferController extends Controller
     }
     public function wishChange($id)
     {
-        if (Auth::user()->id == Offer::where('id',$id)->first()->seller_id) {
+        if (Auth::user()->id == Offer::where('id', $id)->first()->seller_id) {
             return;
         }
         //if offer is watched by current user, delete it from watched offers, else add it to watched offers
@@ -237,7 +257,7 @@ class OfferController extends Controller
     }
     public function softDeleteToggle($id)
     {
-        if (Auth::user()->id != Offer::where('id' ,$id)->first()->seller_id) {
+        if (Auth::user()->id != Offer::where('id', $id)->first()->seller_id) {
             return;
         }
         //soft delete offer

@@ -41,10 +41,12 @@
                 <p class="text-gray-600 mb-4 dark:text-slate-50"> {{ __('description') }}:</p>
                 <p class="text-gray-600 mb-4 dark:text-slate-50">{{ $offer->description }}</p>
                 <ul class="list-disc list-inside dark:text-gray-300">
-                    <li>A place</li>
-                    <li>For features </li>
-                    <li>That are specific</li>
-                    <li>to certain categories</li>
+                    @if(isset($offer->attribs))
+
+                    @foreach ($offer->attribs as $key => $value)
+                    <li>{{ $key }}: {{ $value }}</li>
+                    @endforeach
+                    @endif
                 </ul>
 
                 <h2 class="text-lg font-bold mt-8 mb-2 dark:text-gray-300">{{ __('product_reviews') }}:</h2>
@@ -55,28 +57,31 @@
                             <div class="flex items-center mb-2">
                                 <div class="w-12 h-12 rounded-full bg-gray-300 mr-4"></div>
                                 <div>
-                                    <span class="font-bold dark:text-gray-300">John Doe</span>
-                                    <span class="text-gray-600 dark:text-gray-300">- May 5, 2023</span>
+                                    <span class="font-bold dark:text-gray-300">{{ $opinion->user->name }}</span>
+                                    <span class="text-gray-600 dark:text-gray-300">- {{ $opinion->created_at }}</span>
                                 </div>
                             </div>
-                            <p class="text-gray-600 dark:text-gray-300">Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Donec non faucibus
-                                purus.</p>
+                            <p class="text-gray-600 dark:text-gray-300">{{ $opinion->content }}</p>
                         </div>
                     @endforeach
                 @endif
-                <div class="border rounded-xl p-4">
-                    <div class="flex items-center mb-2">
-                        <div class="w-12 h-12 rounded-full bg-gray-300 mr-4"></div>
-                        <div>
-                            <span class="font-bold dark:text-gray-300">John Doe</span>
-                            <span class="text-gray-600 dark:text-gray-300">- May 5, 2023</span>
-                        </div>
+                <form method="post" action='/opinion'>
+                    @csrf
+                    <div class="flex flex-col mt-8">
+                        <label for="review" class="text-gray-600 dark:text-gray-300">{{ __('your_review') }}:</label>
+                        <textarea name="review" id="review" cols="30" rows="4"
+                            class="border rounded-xl p-4 mt-2 dark:bg-gray-700 dark:text-gray-300"></textarea>
+                        <input type="hidden" name="user_id" value="{{ $offer->auth }}">
+                        <input type="hidden" name="id" value="{{ $offer->seller_id }}">
+                        <input type="hidden" name="id" value="{{ $offer->id }}">
+                        <label for="rating" class="text-gray-600 dark:text-gray-300">{{ __('rating') }}:</label>
+                        <input type="number" name="rating" id="rating" min="1" max="5" value="1"
+                            class="border rounded-xl p-4 mt-2 dark:bg-gray-700 dark:text-gray-300">
+                        <button type="submit"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl mt-4">{{ __('submit') }}</button>
                     </div>
-                    <p class="text-gray-600 dark:text-gray-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Donec non faucibus
-                        purus.</p>
-                </div>
+                    @csrf
+                </form>
             </div>
         </div>
     </div>
