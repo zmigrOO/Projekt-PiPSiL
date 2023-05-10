@@ -74,13 +74,7 @@
                 </form>
             @endif
             <!-- Location change element -->
-            <div class="fixed top-3 z-20 right-36">
-                <select name="lang" id="lang"
-                    class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                    <option value="pl">pl</option>
-                    <option value="en">en</option>
-                </select>
-            </div>
+                <x-locale-changer />
 
             <!-- Page Content -->
             <main class="mt-16 sm:mt-16">
@@ -89,4 +83,6 @@
         </div>
     </div>
 </body>
+<script>
+</script>
 </html>
