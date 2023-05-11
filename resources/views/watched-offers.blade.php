@@ -17,3 +17,23 @@
         </div>
     </div>
 </x-app-layout>
+<script>
+            function watchOffer(offerId) {
+            img = document.getElementById('img' + offerId);
+            fetch('/watch/' + offerId)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(response) {
+                    // update the image src based on the response
+                    if (response.watched == true) {
+                        img.classList.remove('opacity-0');
+                        // console.log('fav.svg');
+                    } else {
+                        img.classList.add('opacity-0');
+                        // console.log('nfav.svg');
+                    }
+                });
+        }
+
+</script>

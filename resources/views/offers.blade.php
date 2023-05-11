@@ -32,7 +32,6 @@
         </div>
         <div class="w-full p-6 mt-16">
             <h2 class="text-lg font-bold mb-2 dark:text-white">Filters</h2>
-
             <h3 class="text-sm font-semibold dark:text-white">Categories</h3>
             @foreach ($attributes['categories'] as $category)
                 <label class="flex items-center dark:text-white">
@@ -42,8 +41,6 @@
                     <span class="text-sm dark:text-white">{{ $category->name }}</span>
                 </label>
             @endforeach
-
-
             <h3 class="text-sm font-semibold mt-4 dark:text-white">Price</h3>
             <x-input-label for="price_min" :value="__('From:')" />
             <x-text-input onchange="filter({{ $attributes['offerIDs'] }})" name="price_min" type="number"
@@ -51,7 +48,6 @@
             <x-input-label for="price_max" :value="__('To:')" />
             <x-text-input onchange="filter({{ $attributes['offerIDs'] }})" name="price_max" type="number"
                 step="0.01" placeholder="To" class="w-1/2" />
-
             <h3 class="text-sm font-semibold mt-4 dark:text-white">Condition</h3>
             @foreach ($attributes['conditions'] as $condition)
                 <label class="flex items-center dark:text-white">
@@ -61,9 +57,7 @@
                     <span class="text-sm dark:text-white">{{ $condition }}</span>
                 </label>
             @endforeach
-
         </div>
-
     </div>
     <script>
         function openFiltersTab() {
@@ -133,60 +127,61 @@
                     });
                 } else {
                     offers.forEach(offer => {
-                        if (!(offer.getAttribute('price') <= Number.parseFloat(price_max) && offer.getAttribute('price') >= Number.parseFloat(price_min))) {
+                        if (!(offer.getAttribute('price') <= Number.parseFloat(price_max) && offer.getAttribute(
+                                'price') >= Number.parseFloat(price_min))) {
                             offer.classList.add('hidden');
                         }
                     });
                 }
             }
         };
-    function watchOffer(offerId) {
-        img = document.getElementById('img' + offerId);
-        fetch('/watch/' + offerId)
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(response) {
-                // update the image src based on the response
-                if (response.watched == true) {
-                    img.classList.remove('opacity-0');
-                    // console.log('fav.svg');
-                } else {
-                    img.classList.add('opacity-0');
-                    // console.log('nfav.svg');
-                }
-            });
-    }
 
-    function toggleActive(offerId, toggle) {
-        img = document.getElementById('soft' + offerId);
-        del = document.getElementById('delete' + offerId);
-        fetch('/toggleActive/' + offerId)
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(response) {
-                // update the image src based on the response
-                if (response.active == true) {
-                    img.src = 'deactivate.svg';
-                    del.style.filter = 'grayscale(100%)';
-                    toggle.title = '{{ __('Deactivate') }}';
-                } else {
-                    img.src = 'activate.svg';
-                    del.style.filter = 'grayscale(0%)';
-                    toggle.title = '{{ __('Activate') }}';
-                }
-            });
-    }
-
-    function deleteOffer(offerId, message) {
-        img = document.getElementById('delete' + offerId);
-        if (img.style.filter == 'grayscale(100%)') {
-            alert(message);
-            return;
+        function watchOffer(offerId) {
+            img = document.getElementById('img' + offerId);
+            fetch('/watch/' + offerId)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(response) {
+                    // update the image src based on the response
+                    if (response.watched == true) {
+                        img.classList.remove('opacity-0');
+                        // console.log('fav.svg');
+                    } else {
+                        img.classList.add('opacity-0');
+                        // console.log('nfav.svg');
+                    }
+                });
         }
-        location.href = '/offer/delete/' + offerId;
-    }
 
+        function toggleActive(offerId, toggle) {
+            img = document.getElementById('soft' + offerId);
+            del = document.getElementById('delete' + offerId);
+            fetch('/toggleActive/' + offerId)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(response) {
+                    // update the image src based on the response
+                    if (response.active == true) {
+                        img.src = 'deactivate.svg';
+                        del.style.filter = 'grayscale(100%)';
+                        toggle.title = '{{ __('Deactivate') }}';
+                    } else {
+                        img.src = 'activate.svg';
+                        del.style.filter = 'grayscale(0%)';
+                        toggle.title = '{{ __('Activate') }}';
+                    }
+                });
+        }
+
+        function deleteOffer(offerId, message) {
+            img = document.getElementById('delete' + offerId);
+            if (img.style.filter == 'grayscale(100%)') {
+                alert(message);
+                return;
+            }
+            location.href = '/offer/delete/' + offerId;
+        }
     </script>
 </x-no-auth>
