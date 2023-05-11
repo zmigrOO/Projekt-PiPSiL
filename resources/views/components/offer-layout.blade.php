@@ -19,9 +19,6 @@
                     <p class="text-gray-600 mb-4 dark:text-gray-400">{{ __('phone_number') }}:
                         {{ substr($offer->phone_number, 0, 3) }}-{{ substr($offer->phone_number, 3, 3) }}-{{ substr($offer->phone_number, 6, 3) }}
                     </p>
-
-
-
                     <div class="flex items-center mb-4">
                         <span class="text-lg font-bold mr-2 dark:text-slate-50">{{ __('price') }}:
                             ${{ $offer->price }}</span>
@@ -41,19 +38,16 @@
                     @endif
                 </div>
             </div>
-
             <div>
                 <p class="text-gray-600 mb-4 dark:text-slate-50"> {{ __('description') }}:</p>
                 <p class="text-gray-600 mb-4 dark:text-slate-50">{{ $offer->description }}</p>
                 <ul class="list-disc list-inside dark:text-gray-300">
                     @if (isset($offer->attribs))
-
                         @foreach ($offer->attribs as $key => $value)
                             <li>{{ $key }}: {{ $value }}</li>
                         @endforeach
                     @endif
                 </ul>
-
                 <h2 class="text-lg font-bold mt-8 mb-2 dark:text-gray-300">{{ __('product_reviews') }}:</h2>
                 {{-- TODO: place the reviews in the foreach loop --}}
                 @if ($offer->opinions != null)
@@ -90,7 +84,6 @@
             </div>
         </div>
     </div>
-
     <script>
         console.log({{ $offer->seller_id }}{{ $offer->auth }})
 

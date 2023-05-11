@@ -1,8 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\AttributeController;
 use App\Models\Category;
 use App\Models\Clothes;
 use App\Models\Computers;
@@ -13,11 +11,9 @@ use App\Models\Offer;
 use App\Models\Opinion;
 use App\Models\User;
 use App\Models\WatchedOffer;
-use Attribute;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Summary of OfferController
@@ -48,7 +44,6 @@ class OfferController extends Controller
             //check if user is logged in
             if (Auth::check()) {
                 $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
-
             } else {
                 $offer->watched = false;
             }
@@ -75,7 +70,6 @@ class OfferController extends Controller
             //check if user is logged in
             if (Auth::check()) {
                 $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
-
             } else {
                 $offer->watched = false;
             }
@@ -127,8 +121,6 @@ class OfferController extends Controller
         $offer->category_id = $request->input('category');
         $offer->offer_creation_date = now();
         $offer->seller_id = Auth::user()->id;
-
-
         $offer->save();
         return redirect(route("my-offers"));
     }
@@ -179,11 +171,7 @@ class OfferController extends Controller
             $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
             $offer->auth = Auth::check() ? Auth::user()->id : null;
         }
-
-
         // select all offers where id is in previous result
-
-
         return view('watched-offers', ['offers' => $offers]);
     }
     public function wishChange($id)
@@ -221,8 +209,6 @@ class OfferController extends Controller
         }
         //get offer and its images
         $offer = Offer::where('id', $id)->first();
-
-
         $offer->images = image::where('offer_id', $offer->id)->orderBy('order', 'asc')->get();
         $offer->category = Category::where('id', $offer->category_id)->first();
         $categories = Category::all();
@@ -235,12 +221,10 @@ class OfferController extends Controller
     }
     public function saveEdit(Request $request)
     {
-
         //get data from request, but pass category as its id
         if (Auth::user()->id != Offer::where('id', $request->input('id'))->first()->seller_id) {
             return redirect()->back();
         }
-
         $offer = Offer::where('id', $request->input('id'))->first();
         $offer->name = $request->input('name');
         $offer->description = $request->input('description');
@@ -250,8 +234,6 @@ class OfferController extends Controller
         $offer->phone_number = str_replace('-', '', ($request->input('phone')));
         $offer->city = $request->input('city');
         $offer->category_id = $request->input('category');
-
-
         $offer->save();
         return redirect(route("my-offers"));
     }
@@ -270,5 +252,4 @@ class OfferController extends Controller
             return response()->json(['active' => true]);
         }
     }
-
 }

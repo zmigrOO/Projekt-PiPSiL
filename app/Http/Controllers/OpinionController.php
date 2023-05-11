@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\opinion;
@@ -9,7 +8,6 @@ class OpinionController extends Controller
 {
     public function add(Request $request)
     {
-
         if ($request->input('review') == null) {
             return redirect()->back()->with('error', 'Opinion cannot be empty');
         }
