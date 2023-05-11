@@ -41,7 +41,9 @@
 
         <div class="min-h-screen bg-gray-100 abs dark:bg-gray-900 fix">
             @if (Route::has('login'))
-                <div class="fixed top-0 z-20 right-0 p-6 text-right">
+            <div class="fixed top-0 z-20 right-0 p-6 text-right">
+                    <!-- Location change element -->
+                        <x-locale-changer :class="'-translate-y-3'" />
                     @auth
                         <a href="{{ url('/home') }}"
                             class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">{{ __('home') }}</a>
@@ -73,8 +75,6 @@
                     </div>
                 </form>
             @endif
-            <!-- Location change element -->
-                <x-locale-changer />
 
             <!-- Page Content -->
             <main class="mt-16 sm:mt-16">
