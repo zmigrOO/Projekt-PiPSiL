@@ -9,7 +9,7 @@
                 <div class="relative top-5">
                     @if ($offer->active == false)
                         <div
-                            class="w-full h-fit border-orange-700 border-solid border-4 rounded-lg p-4 bg-opacity-50 bg-orange-500 form-textarea">
+                            class="w-full h-fit dark:text-gray-50 border-orange-600 dark:border-orange-400 border-solid border-4 rounded-lg p-4 bg-opacity-50 bg-orange-400 dark:bg-orange-600 form-textarea">
                             {{ __('Deactivated') }}</div>
                     @endif
                     <h1 class="text-2xl font-bold mb-2 dark:text-slate-50">{{ $offer->name }}</h1>
