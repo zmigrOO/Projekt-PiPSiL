@@ -7,6 +7,11 @@
             <div>
                 <x-img-carousel :images="$offer->images" />
                 <div class="relative top-5">
+                    @if ($offer->active == false)
+                        <div
+                            class="w-full h-fit border-orange-700 border-solid border-4 rounded-lg p-4 bg-opacity-50 bg-orange-500 form-textarea">
+                            {{ __('Deactivated') }}</div>
+                    @endif
                     <h1 class="text-2xl font-bold mb-2 dark:text-slate-50">{{ $offer->name }}</h1>
                     <p class="text-gray-600 mb-4 dark:text-gray-400">{{ __('condition') }}: {{ $offer->condition }}</p>
                     <p class="text-gray-600 mb-4 dark:text-gray-400">{{ __('seller') }} {{ $offer->seller->name }}</p>
@@ -21,7 +26,7 @@
                         <span class="text-lg font-bold mr-2 dark:text-slate-50">{{ __('price') }}:
                             ${{ $offer->price }}</span>
                     </div>
-                    @if ($offer->auth != null)
+                    @if ($offer->auth != null && $offer->active == true)
                         @if ($offer->auth != $offer->seller_id)
                             <div class="absolute right-5 top-1 transition-all active:scale-50">
                                 <a style="cursor: pointer;"
@@ -41,11 +46,11 @@
                 <p class="text-gray-600 mb-4 dark:text-slate-50"> {{ __('description') }}:</p>
                 <p class="text-gray-600 mb-4 dark:text-slate-50">{{ $offer->description }}</p>
                 <ul class="list-disc list-inside dark:text-gray-300">
-                    @if(isset($offer->attribs))
+                    @if (isset($offer->attribs))
 
-                    @foreach ($offer->attribs as $key => $value)
-                    <li>{{ $key }}: {{ $value }}</li>
-                    @endforeach
+                        @foreach ($offer->attribs as $key => $value)
+                            <li>{{ $key }}: {{ $value }}</li>
+                        @endforeach
                     @endif
                 </ul>
 
