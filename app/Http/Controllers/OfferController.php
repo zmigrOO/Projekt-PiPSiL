@@ -118,7 +118,6 @@ class OfferController extends Controller
     }
     public function add(Request $request): RedirectResponse
     {
-        //get data from request, but pass category as its id
         $offer = new Offer();
         $offer->name = $request->input('name');
         $offer->description = $request->input('description');
@@ -131,9 +130,18 @@ class OfferController extends Controller
         $offer->offer_creation_date = now();
         $offer->seller_id = Auth::user()->id;
 
+        $image = $request->file('image');
+        $offer->image_path = $this->uploadImage($image);
 
         $offer->save();
         return redirect(route("my-offers"));
+    }
+    private function uploadImage($image):string
+    {
+        $filename = time().$image->getClientOriginalName();
+
+        $image->move(public_path('images'), $filename);
+        return $filename;
     }
     public function details($id)
     {

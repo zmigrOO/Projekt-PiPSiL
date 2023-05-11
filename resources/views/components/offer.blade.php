@@ -4,8 +4,8 @@
     <div class="flex font-sans py-2" style="height: 25vh">
         <div class="flex-none w-56 relative rounded-lg overflow-hidden" style="max-width: 25vw">
             <a href="/offers/{{ $offer->id }}">
-                <img src="/images/samolot.bmp" alt=""
-                    class=".hover:scale-110 absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                <img src="/images/{{$offer->image_path}}" alt=""
+                    class=".hover:scale-110 absolute inset-0 w-full h-full object-cover " loading="lazy" />
             </a>
         </div>
         <form class="flex-auto px-6 relative">
