@@ -43,6 +43,7 @@
                 <p class="text-gray-600 mb-4 dark:text-slate-50">{{ $offer->description }}</p>
                 <ul class="list-disc list-inside dark:text-gray-300">
                     @if (isset($offer->attribs))
+                        <p>{{$offer->attribs}}</p>
                         @foreach ($offer->attribs as $key => $value)
                             <li>{{ $key }}: {{ $value }}</li>
                         @endforeach

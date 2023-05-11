@@ -62,8 +62,8 @@ class OfferController extends Controller
     {
         $phrase = $request->input('search');
         // dd($phrase);
-        $offerIDs = Offer::where('name', 'LIKE', '%' . $phrase . '%')->orWhere('description', 'LIKE', '%' . $phrase . '%')->get('id');
-        $offers = Offer::whereIn('id', $offerIDs)->where('active', true)->get();
+        $offerIDs = Offer::where('name', 'LIKE', '%' . $phrase . '%')->where('active', true)->orWhere('description', 'LIKE', '%' . $phrase . '%')->where('active', true)->get('id');
+        $offers = Offer::whereIn('id', $offerIDs)->get();
         foreach ($offers as $offer) {
             $offer->category = Category::where('id', $offer->category_id)->first();
             $offer->image = image::where('offer_id', $offer->id)->where('order', 0)->first();

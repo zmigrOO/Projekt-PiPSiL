@@ -71,9 +71,11 @@
         function filter(ids) {
             //console log all ids as values
             ids = ids.map(item => item.id);
-            offers = [];
+            let offers = [];
+            console.log(ids);
             ids.forEach(id => {
                 offers.push(document.getElementById('offer' + id));
+                console.log(document.getElementById('offer' + id));
             });
             let categories = [];
             let conditions = [];
@@ -91,7 +93,8 @@
                 }
             });
             offers.forEach(offer => {
-                //if has hidden class, remove it
+                // console.log(offer);
+                // if has hidden class, remove it
                 if (offer.classList.contains('hidden')) {
                     offer.classList.remove('hidden');
                 }
