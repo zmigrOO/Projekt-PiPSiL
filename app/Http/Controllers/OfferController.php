@@ -195,7 +195,7 @@ class OfferController extends Controller
     public function delete($id)
     {
         //delete offer and all its images
-        if (Auth::user()->id != Offer::where('id', $id)->first()->seller_id || Offer::where('id', $id)->get('active') == true) {
+        if ((Auth::user()->id != Offer::where('id', $id)->first()->seller_id) || (Offer::where('id', $id)->first()->active)) {
             return redirect()->back();
         }
         Offer::where('id', $id)->delete();

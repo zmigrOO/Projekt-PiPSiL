@@ -177,14 +177,5 @@
                     }
                 });
         }
-
-        function deleteOffer(offerId, message) {
-            img = document.getElementById('delete' + offerId);
-            if (img.style.filter == 'grayscale(100%)') {
-                alert(message);
-                return;
-            }
-            location.href = '/offer/delete/' + offerId;
-        }
     </script>
 </x-no-auth>
