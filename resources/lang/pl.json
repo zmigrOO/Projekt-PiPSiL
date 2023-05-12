@@ -66,6 +66,16 @@
     "Activate":"Aktywuj",
     "Delete":"Usuń",
     "cannot_delete_active_offer":"Nie możesz usunąć aktywnej oferty",
-    "Search":"Szukaj"
+    "Search":"Szukaj",
+    "image":"Zdjęcie",
+    "Deactivated":"Zdezaktywowane",
+    "product_review":"Opinie o produkcie",
+    "your_review":"Dodaj swoją opinię",
+    "rating":"Ocena",
+    "submit":"Potwierdź",
+    "computers":"Komputery",
+    "electronics":"Elektronika",
+    "furniture":"Meble",
+    "clothes":"Odzież"
 }
 

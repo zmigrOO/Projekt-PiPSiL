@@ -29,5 +29,16 @@ return [
     'update_password' => 'Uaktualnij Hasło',
     'dont_wait_add_first_offer' => "Nie czekaj i dodaj swoją pierwszą ofertę!",
     'email'=> 'Email',
-    'characters_entered'=>'znaków'
+    'characters_entered'=>'znaków',
+    'new' => 'Nowy',
+    'like_new' => 'Jak nowy',
+    'very_good' => 'Bardzo dobry',
+    'good' => 'Dobry',
+    'acceptable' => 'Akceptowalny',
+    'used' => 'Używany',
+    'for_parts_or_not_working' => 'Na części lub do naprawy',
+    'computers' => 'Komputery',
+    'electronics' => 'Elektronika',
+    'furniture' => 'Meble',
+    'clothes' => 'Odzież',
 ];
