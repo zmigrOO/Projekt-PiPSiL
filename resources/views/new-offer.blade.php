@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form method="POST" action='/submit-new'>
+                    <form method="POST" action='/submit-new' enctype="multipart/form-data">
                         @csrf
 
                         <!-- Name -->
@@ -91,6 +91,12 @@
                                           :value="old('city')" required autofocus autocomplete="city" />
                             <x-input-error :messages="$errors->get('city')" class="mt-2" />
                         </div>
+                        <!-- Image -->
+                        <div class="mt-4">
+                            <x-input-label for="image" :value="__('image')" />
+                            <input type="file" class="form-control block mt-1 w-full" multiple name="image" id="image" required>
+                            <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                        </div>
 
                         <div class="flex items-center justify-end mt-4">
                             <x-primary-button class="ml-4">
@@ -102,4 +108,13 @@
             </div>
         </div>
     </div>
+{{--    <script>--}}
+{{--        import {--}}
+{{--            Select,--}}
+{{--            initTE--}}
+{{--        } from "tw-elements";--}}
+{{--        initTE({--}}
+{{--            Select--}}
+{{--        });--}}
+{{--    </script>--}}
 </x-app-layout>

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -21,6 +20,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('phone_number');
             $table->string('city');
+            $table->string('image_path');
             $table->integer('seller_id')->foreign()->references('id')->on('users');
             $table->boolean('active')->default(true);
             $table->timestamp('offer_creation_date');

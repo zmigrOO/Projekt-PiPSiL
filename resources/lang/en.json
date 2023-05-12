@@ -66,5 +66,14 @@
     "Activate":"Activate",
     "Delete":"Delete",
     "cannot_delete_active_offer":"You cannot delete an active offer",
-    "Search":"Search"
+    "Search":"Search",
+    "image":"Image",
+    "Deactivated":"Deactivated",
+    "your_review":"Add Your Review",
+    "rating":"Rating",
+    "submit":"Submit",
+    "computers":"Computers",
+    "electronics":"Electronics",
+    "furniture":"Furniture",
+    "clothes":"Clothes"
 }

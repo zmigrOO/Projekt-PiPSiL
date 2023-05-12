@@ -29,5 +29,16 @@ return [
     'update_password' => 'Update Password',
     'dont_wait_add_first_offer' =>'Do not wait and add your first offer!',
     'email'=> 'Email',
-    'characters_entered'=>'characters entered'
+    'characters_entered'=>'characters entered',
+    'new' => 'Brand New',
+    'like_new' => 'Like New',
+    'very_good' => 'Very Good',
+    'good' => 'Good',
+    'acceptable' => 'Acceptable',
+    'used' => 'Used',
+    'for_parts_or_not_working' => 'For Parts or Not Working',
+    'computers' => 'Computers',
+    'electronics' => 'Electronics',
+    'furniture' => 'Furniture',
+    'clothes' => 'Clothes',
 ];

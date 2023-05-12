@@ -5,7 +5,7 @@
     <div class="container mx-auto py-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-                <x-img-carousel :images="$offer->images" />
+                <x-img-carousel :image="$offer->image_path" />
                 <div class="relative top-5">
                     @if ($offer->active == false)
                         <div
