@@ -32,7 +32,6 @@
         </div>
         <div class="w-full p-6 mt-16">
             <h2 class="text-lg font-bold mb-2 dark:text-white">Filters</h2>
-
             <h3 class="text-sm font-semibold dark:text-white">Categories</h3>
             @foreach ($attributes['categories'] as $category)
                 <label class="flex items-center dark:text-white">
@@ -42,8 +41,6 @@
                     <span class="text-sm dark:text-white">{{ $category->name }}</span>
                 </label>
             @endforeach
-
-
             <h3 class="text-sm font-semibold mt-4 dark:text-white">Price</h3>
             <x-input-label for="price_min" :value="__('From:')" />
             <x-text-input onchange="filter({{ $attributes['offerIDs'] }})" name="price_min" type="number"
@@ -51,7 +48,6 @@
             <x-input-label for="price_max" :value="__('To:')" />
             <x-text-input onchange="filter({{ $attributes['offerIDs'] }})" name="price_max" type="number"
                 step="0.01" placeholder="To" class="w-1/2" />
-
             <h3 class="text-sm font-semibold mt-4 dark:text-white">Condition</h3>
             @foreach ($attributes['conditions'] as $condition)
                 <label class="flex items-center dark:text-white">
@@ -61,9 +57,7 @@
                     <span class="text-sm dark:text-white">{{ $condition }}</span>
                 </label>
             @endforeach
-
         </div>
-
     </div>
     <script>
         function openFiltersTab() {
@@ -77,9 +71,11 @@
         function filter(ids) {
             //console log all ids as values
             ids = ids.map(item => item.id);
-            offers = [];
+            let offers = [];
+            console.log(ids);
             ids.forEach(id => {
                 offers.push(document.getElementById('offer' + id));
+                console.log(document.getElementById('offer' + id));
             });
             let categories = [];
             let conditions = [];
@@ -97,7 +93,8 @@
                 }
             });
             offers.forEach(offer => {
-                //if has hidden class, remove it
+                // console.log(offer);
+                // if has hidden class, remove it
                 if (offer.classList.contains('hidden')) {
                     offer.classList.remove('hidden');
                 }
@@ -121,24 +118,64 @@
             if (!(price_max == '' && price_min == '')) {
                 if (price_min != '' && price_max == '') {
                     offers.forEach(offer => {
-                        if (!(offer.getAttribute('price') >= price_min)) {
+                        if (!(offer.getAttribute('price') >= Number.parseFloat(price_min))) {
                             offer.classList.add('hidden');
                         }
                     });
                 } else if (price_max != '' && price_min == '') {
                     offers.forEach(offer => {
-                        if (!(offer.getAttribute('price') <= price_max)) {
+                        if (!(offer.getAttribute('price') <= Number.parseFloat(price_max))) {
                             offer.classList.add('hidden');
                         }
                     });
                 } else {
                     offers.forEach(offer => {
-                        if (!(offer.getAttribute('price') <= price_max && offer.getAttribute('price') >= price_min)) {
+                        if (!(offer.getAttribute('price') <= Number.parseFloat(price_max) && offer.getAttribute(
+                                'price') >= Number.parseFloat(price_min))) {
                             offer.classList.add('hidden');
                         }
                     });
                 }
             }
         };
+
+        function watchOffer(offerId) {
+            img = document.getElementById('img' + offerId);
+            fetch('/watch/' + offerId)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(response) {
+                    // update the image src based on the response
+                    if (response.watched == true) {
+                        img.classList.remove('opacity-0');
+                        // console.log('fav.svg');
+                    } else {
+                        img.classList.add('opacity-0');
+                        // console.log('nfav.svg');
+                    }
+                });
+        }
+
+        function toggleActive(offerId, toggle) {
+            img = document.getElementById('soft' + offerId);
+            del = document.getElementById('delete' + offerId);
+            fetch('/toggleActive/' + offerId)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(response) {
+                    // update the image src based on the response
+                    if (response.active == true) {
+                        img.src = 'deactivate.svg';
+                        del.style.filter = 'grayscale(100%)';
+                        toggle.title = '{{ __('Deactivate') }}';
+                    } else {
+                        img.src = 'activate.svg';
+                        del.style.filter = 'grayscale(0%)';
+                        toggle.title = '{{ __('Activate') }}';
+                    }
+                });
+        }
     </script>
 </x-no-auth>

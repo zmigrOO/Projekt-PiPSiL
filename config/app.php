@@ -81,7 +81,7 @@ return [
     | to any of the locales which will be supported by the application.
     |
     */
-
+    
     'locale' => 'pl',
 
     /*
@@ -95,12 +95,21 @@ return [
     |
     */
 
-    'locales' => [
-        'pl' => ['name' => 'Polski'],
-        'en' => ['name' => 'English'],
-    ],
-
     'fallback_locale' => 'pl',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Available locales
+    |--------------------------------------------------------------------------
+    |
+    | List all locales that your application works with
+    |
+    */
+
+    'available_locales' => [
+        'English' => 'en',
+        'Polski' => 'pl',
+    ],
 
     /*
     |--------------------------------------------------------------------------

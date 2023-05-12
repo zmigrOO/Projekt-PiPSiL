@@ -23,7 +23,7 @@
 ])
 </head>
 
-<body class="font-sans w-full antialiased relative dark:bg-grey-900">
+<body class="font-sans w-full antialiased dark:bg-grey-900">
     <div>
         <div
             class="z-10 mx-auto px-4 abs sm:px-6 top-0 left-0 fixed w-full lg:px-8 bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
@@ -48,7 +48,9 @@
 
         <div class="min-h-screen bg-gray-100 abs dark:bg-gray-900 fix">
             @if (Route::has('login'))
-                <div class="fixed top-0 z-20 right-0 p-6 text-right">
+            <div class="fixed top-0 z-20 right-0 p-6 text-right">
+                    <!-- Location change element -->
+                        <x-locale-changer :class="'-translate-y-3'" />
                     @auth
                         <a href="{{ url('/home') }}"
                             class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">{{ __('home') }}</a>
@@ -65,18 +67,20 @@
             @endif
 
             <!-- Responsive Text Input and Submit Button -->
-            @if(Route::currentRouteName() == 'offers')
-            <form action="/search" method="get" class="p-4 text-center z-0 sm:z-20 relative sm:fixed top-16 sm:top-0 -translate-x-1/2 w-full sm:w-auto" style="left: 50%">
-                <div class="flex-none float-left w-fit">
-                    <x-text-input id="search" class="sm:w-80 h-10" type="text" name="search" autofocus
-                        placeholder="{{ __('Search') }}" />
-                </div>
-                <div class="flex-none float-right">
-                    <x-primary-button class="h-10 ml-2">
-                        {{ __('Search') }}
-                    </x-primary-button>
-                </div>
-            </form>
+            @if (Route::currentRouteName() == 'offers')
+                <form action="/search" method="get"
+                    class="p-4 text-center z-0 sm:z-20 relative sm:fixed top-16 sm:top-0 -translate-x-1/2 w-full sm:w-auto"
+                    style="left: 50%">
+                    <div class="flex-none float-left w-fit">
+                        <x-text-input id="search" class="sm:w-80 h-10" type="text" name="search" autofocus
+                            placeholder="{{ __('Search') }}" />
+                    </div>
+                    <div class="flex-none float-right">
+                        <x-primary-button class="h-10 ml-2">
+                            {{ __('Search') }}
+                        </x-primary-button>
+                    </div>
+                </form>
             @endif
 
             <!-- Page Content -->
@@ -86,5 +90,6 @@
         </div>
     </div>
 </body>
-
+<script>
+</script>
 </html>

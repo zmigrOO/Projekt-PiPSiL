@@ -1,8 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Clothes;
+use App\Models\Computers;
+use App\Models\Electronics;
+use App\Models\Furniture;
 use App\Models\image;
 use App\Models\Offer;
 use App\Models\Opinion;
@@ -11,22 +14,12 @@ use App\Models\WatchedOffer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Summary of OfferController
  */
 class OfferController extends Controller
 {
-    // public $conditions = [
-    //     'Brand new',
-    //     'Like new',
-    //     'Very good',
-    //     'Good',
-    //     'Acceptable',
-    //     'Used',
-    //     'For parts or not working'
-    // ];
     public $conditions = [
         'new' => 'Nowy',
         'like_new' => 'Jak nowy',
@@ -51,7 +44,6 @@ class OfferController extends Controller
             //check if user is logged in
             if (Auth::check()) {
                 $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
-
             } else {
                 $offer->watched = false;
             }
@@ -70,15 +62,14 @@ class OfferController extends Controller
     {
         $phrase = $request->input('search');
         // dd($phrase);
-        $offerIDs = Offer::where('name', 'LIKE', '%' . $phrase . '%')->get('id');
-        $offers = Offer::whereIn('id', $offerIDs)->where('active', true)->get();
+        $offerIDs = Offer::where('name', 'LIKE', '%' . $phrase . '%')->where('active', true)->orWhere('description', 'LIKE', '%' . $phrase . '%')->where('active', true)->get('id');
+        $offers = Offer::whereIn('id', $offerIDs)->get();
         foreach ($offers as $offer) {
             $offer->category = Category::where('id', $offer->category_id)->first();
             $offer->image = image::where('offer_id', $offer->id)->where('order', 0)->first();
             //check if user is logged in
             if (Auth::check()) {
                 $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
-
             } else {
                 $offer->watched = false;
             }
@@ -130,8 +121,6 @@ class OfferController extends Controller
         $offer->category_id = $request->input('category');
         $offer->offer_creation_date = now();
         $offer->seller_id = Auth::user()->id;
-
-
         $offer->save();
         return redirect(route("my-offers"));
     }
@@ -151,6 +140,21 @@ class OfferController extends Controller
         foreach ($offer->opinions as $opinion) {
             $opinion->user = User::where('id', $opinion->user_id)->first();
         }
+        switch ($offer->category->name) {
+            case 'Computers':
+                $offer->attribs = Computers::where('offer_id', $id)->first();
+                break;
+            case 'Electronics':
+                $offer->attribs = Electronics::where('offer_id', $id)->first();
+                break;
+            case 'Furniture':
+                $offer->attribs = Furniture::where('offer_id', $id)->first();
+                break;
+            case 'Clothes':
+                $offer->attribs = Clothes::where('offer_id', $id)->first();
+                break;
+            default:
+        }
         $offer->auth = Auth::check() ? Auth::user()->id : null;
         // dd($offer);
         return view('components.offer-layout', ['offer' => $offer]);
@@ -167,15 +171,14 @@ class OfferController extends Controller
             $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
             $offer->auth = Auth::check() ? Auth::user()->id : null;
         }
-
-
         // select all offers where id is in previous result
-
-
         return view('watched-offers', ['offers' => $offers]);
     }
     public function wishChange($id)
     {
+        if (Auth::user()->id == Offer::where('id', $id)->first()->seller_id) {
+            return;
+        }
         //if offer is watched by current user, delete it from watched offers, else add it to watched offers
         if (WatchedOffer::where('offer_id', $id)->where('user_id', Auth::user()->id)->exists()) {
             WatchedOffer::where('offer_id', $id)->where('user_id', Auth::user()->id)->delete();
@@ -192,6 +195,9 @@ class OfferController extends Controller
     public function delete($id)
     {
         //delete offer and all its images
+        if ((Auth::user()->id != Offer::where('id', $id)->first()->seller_id) || (Offer::where('id', $id)->first()->active)) {
+            return redirect()->back();
+        }
         Offer::where('id', $id)->delete();
         image::where('offer_id', $id)->delete();
         return redirect()->back();
@@ -216,6 +222,9 @@ class OfferController extends Controller
     public function saveEdit(Request $request)
     {
         //get data from request, but pass category as its id
+        if (Auth::user()->id != Offer::where('id', $request->input('id'))->first()->seller_id) {
+            return redirect()->back();
+        }
         $offer = Offer::where('id', $request->input('id'))->first();
         $offer->name = $request->input('name');
         $offer->description = $request->input('description');
@@ -225,13 +234,14 @@ class OfferController extends Controller
         $offer->phone_number = str_replace('-', '', ($request->input('phone')));
         $offer->city = $request->input('city');
         $offer->category_id = $request->input('category');
-
-
         $offer->save();
         return redirect(route("my-offers"));
     }
     public function softDeleteToggle($id)
     {
+        if (Auth::user()->id != Offer::where('id', $id)->first()->seller_id) {
+            return;
+        }
         //soft delete offer
         $offer = Offer::where('id', $id)->first();
         if ($offer->active) {
@@ -242,5 +252,4 @@ class OfferController extends Controller
             return response()->json(['active' => true]);
         }
     }
-
 }

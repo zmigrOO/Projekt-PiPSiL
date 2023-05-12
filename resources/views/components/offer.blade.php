@@ -5,7 +5,8 @@
         <div class="flex-none w-56 relative rounded-lg overflow-hidden" style="max-width: 25vw">
             <a href="/offers/{{ $offer->id }}">
                 <img src="/images/samolot.bmp" alt=""
-                    class=".hover:scale-110 absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                    class=".hover:scale-110 absolute transition-all hover:scale-110 inset-0 w-full h-full object-cover"
+                    loading="lazy" />
             </a>
         </div>
         <form class="flex-auto px-6 relative">
@@ -23,13 +24,13 @@
                 </div>
                 @if ($offer->auth != null)
                     @if ($offer->auth != $offer->seller_id)
-                        <div class="absolute right-0 bottom-0">
+                        <div class="absolute bottom-0 right-0 transition-all active:scale-50">
                             <a style="cursor: pointer;"
                                 onclick="watchOffer({{ $offer->id }}, document.getElementById('img{{ $offer->id }}'))">
-                                <img id="img{{ $offer->id }}" class="dark:invert"
-                                    src="@if ($offer->watched == true) fav.svg @else nfav.svg @endif"
-                                    alt="favourite" class="w-5 h-5">
-
+                                <img class="dark:invert relative transition-all hover:scale-110 z-20" src="/nfav.svg"
+                                    alt="favourite">
+                                <img id="img{{ $offer->id }}" src="/fav.svg"
+                                    class="absolute z-10 top-0 transition-all hover:scale-110 @if ($offer->watched != true) opacity-0 @endif">
                             </a>
                         </div>
                     @endif
@@ -39,13 +40,13 @@
                 <div class="absolute right-5 bottom-5">
                     <div class=" h-1/3 w-fit float-left">
                         <a title="{{ __('Edit') }}" href="/edit/{{ $offer->id }}" style="cursor: pointer;">
-                            <img src="edit.svg" alt="edit">
+                            <img src="edit.svg" alt="edit" class="transition-all hover:scale-110">
                         </a>
                     </div>
                     <div class=" h-1/3 w-fit float-left">
                         <a title="{{ $offer->active ? __('Deactivate') : __('Activate') }}"
                             onclick="toggleActive({{ $offer->id }}, this)" style="cursor: pointer">
-                            <img id="soft{{ $offer->id }}"
+                            <img class="transition-all hover:scale-110" id="soft{{ $offer->id }}"
                                 src="@if ($offer->active == true) deactivate.svg @else activate.svg @endif"
                                 alt="deactivate" style="cursor: pointer;">
                         </a>
@@ -54,7 +55,8 @@
                         <a title="{{ __('Delete') }}"
                             onclick="deleteOffer({{ $offer->id }}, '{{ __('cannot_delete_active_offer') }}')"
                             style="cursor: pointer;">
-                            <img id="delete{{ $offer->id }}" class="dark:invert" src="delete.svg" alt="delete"
+                            <img class="transition-all hover:scale-110" id="delete{{ $offer->id }}"
+                                class="dark:invert" src="delete.svg" alt="delete"
                                 @if ($offer->active == true) style="filter: grayscale(100%)" @endif>
                         </a>
                     </div>
@@ -63,61 +65,3 @@
         </form>
     </div>
 </div>
-<script>
-    function watchOffer(offerId) {
-        img = document.getElementById('img' + offerId);
-        fetch('/watch/' + offerId)
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(response) {
-                // update the image src based on the response
-                if (response.watched == true) {
-                    img.src = 'fav.svg';
-                    // console.log('fav.svg');
-                } else {
-                    img.src = 'nfav.svg';
-                    // console.log('nfav.svg');
-                }
-            });
-    }
-
-    function toggleActive(offerId, toggle) {
-        img = document.getElementById('soft' + offerId);
-        del = document.getElementById('delete' + offerId);
-        fetch('/toggleActive/' + offerId)
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(response) {
-                // update the image src based on the response
-                if (response.active == true) {
-                    img.src = 'deactivate.svg';
-                    del.style.filter = 'grayscale(100%)';
-                    toggle.title = '{{ __('Deactivate') }}';
-                } else {
-                    img.src = 'activate.svg';
-                    del.style.filter = 'grayscale(0%)';
-                    toggle.title = '{{ __('Activate') }}';
-                }
-            });
-    }
-
-    function deleteOffer(offerId, message) {
-        img = document.getElementById('delete' + offerId);
-        if (img.style.filter == 'grayscale(100%)') {
-            alert(message);
-            return;
-        }
-        location.href = '/offer/delete/' + offerId;
-    }
-</script>
-<style>
-    a img:hover {
-        transform: scale(1.1);
-    }
-
-    a img {
-        transition: .5s;
-    }
-</style>
