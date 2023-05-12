@@ -14,6 +14,13 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @include('meta::manager', [
+   'title'         => 'Available offers - Shop Now!',
+   'description'   => 'Find the best deals and discounts on a wide range of products at our online store. Shop now and get great savings on electronics, fashion, home goods, and more. Fast and reliable shipping available. Shop now and start saving!',
+   'author'        => 'Patryk Żmigrodzki, Aleksandra Kozubal, Natalia Wieczorek',
+   'keywords'      => 'offers, discounts, deals, electronics, fashion, home goods',
+   'geo_region'    => 'PL',
+])
 </head>
 
 <body class="font-sans w-full antialiased dark:bg-grey-900">
