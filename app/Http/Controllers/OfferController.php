@@ -47,6 +47,7 @@ class OfferController extends Controller
                 $offer->watched = false;
             }
             $offer->auth = Auth::check() ? Auth::user()->id : null;
+            $offer->images = json_decode($offer->image_path)[0];
         }
         $categories = Category::all();
         $attributes = [
@@ -72,6 +73,7 @@ class OfferController extends Controller
                 $offer->watched = false;
             }
             $offer->auth = Auth::check() ? Auth::user()->id : null;
+            $offer->images = json_decode($offer->image_path)[0];
         }
         $categories = Category::all();
         $attributes = [
@@ -91,6 +93,7 @@ class OfferController extends Controller
             $offer->category = Category::where('id', $offer->category_id)->get()->first();
             $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
             $offer->auth = Auth::check() ? Auth::user()->id : null;
+            $offer->images = json_decode($offer->image_path)[0];
         }
         return view('my-offers', ['offers' => $offers]);
     }
@@ -118,18 +121,22 @@ class OfferController extends Controller
         $offer->offer_creation_date = now();
         $offer->seller_id = Auth::user()->id;
 
-        $image = $request->file('image');
-        $offer->image_path = $this->uploadImage($image);
-
+        $offer->image_path = $this->uploadImage($request->file('image'));
         $offer->save();
         return redirect(route("my-offers"));
     }
-    private function uploadImage($image):string
+    private function uploadImage($images): string
     {
-        $filename = time().$image->getClientOriginalName();
+        // $filename = time().$image->getClientOriginalName();
 
-        $image->move(public_path('images'), $filename);
-        return $filename;
+        // return $filename;
+        $names = [];
+        foreach ($images as $image) {
+            $filename = $image->getClientOriginalName();
+            $image->move(public_path('images'), $filename);
+            array_push($names, $filename);
+        }
+        return json_encode($names);
     }
     public function details($id)
     {
@@ -162,6 +169,7 @@ class OfferController extends Controller
             default:
         }
         $offer->auth = Auth::check() ? Auth::user()->id : null;
+        $offer->images = json_decode($offer->image_path);
         // dd($offer);
         return view('components.offer-layout', ['offer' => $offer]);
     }
@@ -175,6 +183,7 @@ class OfferController extends Controller
             $offer->category = Category::where('id', $offer->category_id)->first();
             $offer->watched = WatchedOffer::where('offer_id', $offer->id)->where('user_id', Auth::user()->id)->exists();
             $offer->auth = Auth::check() ? Auth::user()->id : null;
+            $offer->images = json_decode($offer->image_path)[0];
         }
         // select all offers where id is in previous result
         return view('watched-offers', ['offers' => $offers]);

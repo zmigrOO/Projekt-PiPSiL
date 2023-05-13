@@ -5,7 +5,7 @@
     <div class="container mx-auto py-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-                <x-img-carousel :image="$offer->image_path" />
+                <x-img-carousel :images="$offer->images" />
                 <div class="relative top-5">
                     @if ($offer->active == false)
                         <div
@@ -72,7 +72,7 @@
                         <textarea name="review" id="review" cols="30" rows="4"
                             class="border rounded-xl p-4 mt-2 dark:bg-gray-700 dark:text-gray-300"></textarea>
                         <input type="hidden" name="user_id" value="{{ $offer->auth }}">
-                        <input type="hidden" name="id" value="{{ $offer->seller_id }}">
+                        <input type="hidden" name="seller_id" value="{{ $offer->seller_id }}">
                         <input type="hidden" name="id" value="{{ $offer->id }}">
                         <label for="rating" class="text-gray-600 dark:text-gray-300">{{ __('rating') }}:</label>
                         <input type="number" name="rating" id="rating" min="1" max="5" value="1"

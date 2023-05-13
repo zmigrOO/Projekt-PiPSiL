@@ -1,11 +1,19 @@
-@props(['image'])
+@props(['images'])
 <div>
     <!-- Because you are alive, everything is possible. - Thich Nhat Hanh -->
     <div class="carousel overflow-hidden rounded-xl bg-gray-200 scroll">
         <div class="carousel-inner flex overflow-hidden">
+            @foreach ($images as $key => $image)
                 <div class="carousel-item">
                     <img class="w-full h-auto" src="/images/{{ $image }}" alt="Carousel Image">
                 </div>
+            @endforeach
+        </div>
+
+        <div class="carousel-pagination mt-2 mb-2 flex justify-center">
+            @foreach ($images as $key => $image)
+                <button class="pagination-dot @if ($key === 0) active @endif"></button>
+            @endforeach
         </div>
     </div>
 
