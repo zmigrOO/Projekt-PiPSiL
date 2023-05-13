@@ -1,11 +1,11 @@
 @props(['images'])
 <div>
     <!-- Because you are alive, everything is possible. - Thich Nhat Hanh -->
-    <div class="carousel overflow-hidden rounded-xl bg-gray-200 scroll">
-        <div class="carousel-inner flex overflow-hidden">
+    <div class="carousel overflow-hidden w-fit rounded-xl bg-gray-200">
+        <div class="carousel-inner flex overflow-hidden snap-x overflow-x-hidden scroll-smooth ">
             @foreach ($images as $key => $image)
-                <div class="carousel-item">
-                    <img class="w-full h-auto" src="/images/{{ $image }}" alt="Carousel Image">
+                <div class="carousel-item relative h-full justify-center">
+                    <img class="h-full object-contain relative -translate-x-1/2 left-1/2" src="/images/{{ $image }}" alt="Carousel Image">
                 </div>
             @endforeach
         </div>
@@ -55,13 +55,6 @@
     });
 </script>
 <style>
-    .carousel-inner {
-        scroll-snap-type: x mandatory;
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
-        scroll-behavior: smooth;
-    }
-
     .carousel-item {
         scroll-snap-align: center;
         flex: none;
