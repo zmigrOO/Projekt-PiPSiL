@@ -73,7 +73,7 @@
                         <div class="mt-4">
                             <x-input-label for="price" :value="__('price')" />
                             <x-text-input id="price" class="block mt-1 w-full" type="number" step="0.01"
-                                min="1" name="price" :value="$offer->price" required />
+                                min="0" name="price" :value="$offer->price" required />
                             <x-input-error :messages="$errors->get('price')" class="mt-2" />
                         </div>
                         <!-- Phone number -->

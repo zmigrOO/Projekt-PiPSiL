@@ -75,10 +75,11 @@
                         <input type="hidden" name="seller_id" value="{{ $offer->seller_id }}">
                         <input type="hidden" name="id" value="{{ $offer->id }}">
                         <label for="rating" class="text-gray-600 dark:text-gray-300">{{ __('rating') }}:</label>
-                        <input type="number" name="rating" id="rating" min="1" max="5" value="1"
+                        <input type="number" name="rating" id="rating" min="1" max="5" value="5"
                             class="border rounded-xl p-4 mt-2 dark:bg-gray-700 dark:text-gray-300">
-                        <button type="submit"
-                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl mt-4">{{ __('submit') }}</button>
+
+                            <button type="submit"
+                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl mt-4">@if($offer->auth){{ __('submit') }}@else{{ __('log_in_to_review') }}@endif</button>
                     </div>
                     @csrf
                 </form>
