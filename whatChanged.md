@@ -1,3 +1,5 @@
 ## What changed?
-- [x] Added possibility to add a photo to an offer
-- [x] Added reviews for every offer
+- [x] Offers require photo of product
+- [x] Users can add reviews and rate offers
+- [x] There is button to change locales
+- [x] Secured access to deactivated offers
