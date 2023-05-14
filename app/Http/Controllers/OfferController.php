@@ -21,13 +21,13 @@ use Illuminate\Support\Facades\Auth;
 class OfferController extends Controller
 {
     public $conditions = [
-        'new' => 'Nowy',
-        'like_new' => 'Jak nowy',
-        'very_good' => 'Bardzo dobry',
-        'good' => 'Dobry',
-        'acceptable' => 'Akceptowalny',
-        'used' => 'Używany',
-        'for_parts_or_not_working' => 'Na części lub do naprawy'
+        'New' => 'Nowy',
+        'Like New' => 'Jak nowy',
+        'Very Good' => 'Bardzo dobry',
+        'Good' => 'Dobry',
+        'Acceptable' => 'Akceptowalny',
+        'Used' => 'Używany',
+        'For Parts or Not Working' => 'Na części lub do naprawy'
     ];
     public function create()
     {

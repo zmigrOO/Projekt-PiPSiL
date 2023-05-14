@@ -75,5 +75,7 @@
     "computers":"Computers",
     "electronics":"Electronics",
     "furniture":"Furniture",
-    "clothes":"Clothes"
+    "clothes":"Clothes",
+    "create_an_account":"Don't have an account? Create now!",
+    "log_in_to_review":"Log in to review"
 }

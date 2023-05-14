@@ -40,5 +40,5 @@ return [
     'computers' => 'Computers',
     'electronics' => 'Electronics',
     'furniture' => 'Furniture',
-    'clothes' => 'Clothes',
+    'clothes' => 'Clothes'
 ];
