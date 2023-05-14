@@ -7,4 +7,5 @@
 - [x] User can now add more than one photo to an offer
 - [x] Fixed a bit of code redundancy
 - [x] Further improved RWD
+- [x] There are stars in the opinions
 

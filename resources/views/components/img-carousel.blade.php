@@ -63,8 +63,8 @@
     }
 
     .carousel-pagination .pagination-dot {
-        width: 8px;
-        height: 8px;
+        width: 16px;
+        height: 16px;
         margin: 0 2px;
         background-color: rgba(0, 0, 0, 0.5);
         border-radius: 50%;
