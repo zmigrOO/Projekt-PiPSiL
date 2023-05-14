@@ -40,10 +40,11 @@
             </div>
             <div>
                 <p class="text-lg font-bold mt-4 mb-2 dark:text-gray-300">{{ __('description') }}:</p>
-                <span class="text-gray-600 mb-4 max-w-full break-words dark:text-slate-50">{{ $offer->description }}</span>
+                <span
+                    class="text-gray-600 mb-4 max-w-full break-words dark:text-slate-50">{{ $offer->description }}</span>
                 <ul class="list-disc list-inside dark:text-gray-300">
                     @if (isset($offer->attribs))
-                        <p>{{$offer->attribs}}</p>
+                        <p>{{ $offer->attribs }}</p>
                         @foreach ($offer->attribs as $key => $value)
                             <li>{{ $key }}: {{ $value }}</li>
                         @endforeach
@@ -57,8 +58,24 @@
                             <div class="flex items-center mb-2">
                                 <div class="w-12 h-12 rounded-full bg-gray-300 mr-4"></div>
                                 <div>
-                                    <span class="font-bold dark:text-gray-300">{{ $opinion->user->name }}</span>
+                                    <span class="font-bold dark:text-gray-300 ">{{ $opinion->user->name }}</span>
                                     <span class="text-gray-600 dark:text-gray-300">- {{ $opinion->created_at }}</span>
+                                    <div class="ml-4 float-right">
+                                        @for ($i = 0; $i < 5; $i++)
+                                            @if ($i < $opinion->rating)
+                                                <div class="relative float-left">
+
+                                                    <img src="/star1.svg" alt="star" class="w-6 h-6 float-left">
+                                                    <img src="/star0.svg" alt="star"
+                                                        class="w-6 h-6 absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 brightness-50 dark:brightness-100">
+                                                </div>
+                                            @else
+                                                <div class="relative float-left">
+                                                    <img src="/star0.svg" alt="star" class="w-6 h-6 brightness-50 dark:brightness-100">
+                                                </div>
+                                            @endif
+                                        @endfor
+                                    </div>
                                 </div>
                             </div>
                             <p class="text-gray-600 dark:text-gray-300">{{ $opinion->content }}</p>
@@ -78,8 +95,12 @@
                         <input type="number" name="rating" id="rating" min="1" max="5" value="5"
                             class="border rounded-xl p-4 mt-2 dark:bg-gray-700 dark:text-gray-300">
 
-                            <button type="submit"
-                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl mt-4">@if($offer->auth){{ __('submit') }}@else{{ __('log_in_to_review') }}@endif</button>
+                        <button type="submit"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl mt-4">
+                            @if ($offer->auth)
+                                {{ __('submit') }}@else{{ __('log_in_to_review') }}
+                            @endif
+                        </button>
                     </div>
                     @csrf
                 </form>
