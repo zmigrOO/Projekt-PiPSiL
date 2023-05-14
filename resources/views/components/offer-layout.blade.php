@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div>
-                <p class="text-gray-600 mb-4 dark:text-slate-50"> {{ __('description') }}:</p>
+                <p class="text-lg font-bold mt-4 mb-2 dark:text-gray-300">{{ __('description') }}:</p>
                 <p class="text-gray-600 mb-4 dark:text-slate-50">{{ $offer->description }}</p>
                 <ul class="list-disc list-inside dark:text-gray-300">
                     @if (isset($offer->attribs))
